@@ -1,0 +1,67 @@
+@extends('site.layout')
+
+@section('conteudo')
+<h2 style="margin-left:40%; margin-top:15px;margin-buttom:15px; ">Editar Registro</h2>
+<div class="container well ">
+    
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">NOME *</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="inputNome" placeholder="digite o nome completo">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">CPF/CNPF *</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="inputCpf/cnpf" placeholder="DIGITE O CPF/CNPJ">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">PROCESSO</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="inputProcesso" placeholder="Nº do Processo">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">EF</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="inputEf" placeholder="Nº do EF">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">ANUIDADE INICIAL *</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="inputAnuidadeInicial" placeholder="Exemplo: 2019">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">ANUIDADE FINAL *</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="inputValorAnuidadeFinal" placeholder="Exemplo: 2020">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">VALOR ORIGINÁRIO</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="inputValorValorOriginario" placeholder="R$: 000,00">
+    </div>
+  </div>
+
+ 
+  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </div>
+  </div>
+</form>
+</div>
+
+@endsection
