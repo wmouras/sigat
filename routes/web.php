@@ -2,6 +2,10 @@
 
 Route::get('/divida-ativa','DividaAtiva\\dividaController@index')->name('home');
 
+Route::get('/filtro',function(){
+    return view('site.filtro');
+})->name('filtro');
+
 Route::get('/cadAnuidadeAtivo', function(){
     return view('site.cadastrarAnuidadeAtivo');
 }   )->name('anuidadeAtivo');

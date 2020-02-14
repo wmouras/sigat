@@ -91,11 +91,12 @@
         border-radius: 0;
         border-top: 1px rgba(0,0,0,139) solid;
         overflow-y: auto;
-        background-color: #222;
+        background-color: #1C1C1C;
         /*background-color: #5A6B7D;*/
         bottom: 0;
         overflow-x: hidden;
         padding-bottom: 40px;
+        
     }
 
     .side-nav>li>a {
@@ -151,7 +152,7 @@
     padding: 5px 15px;
 }
 #titulo{
-    color:	#DCDCDC;
+    color:	#C0C0C0;
     margin-left: 50px;
 }
 #cabecalhoNavebar{
@@ -167,7 +168,7 @@
 <div id="noty-holder"></div>
 <div id="wrapper">
     <!-- Navigation -->
-    <nav id="bordas" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav id="bordas" style="" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div id="cabecalhoNavebar" class="navbar-header">
             <div>
@@ -181,7 +182,7 @@
                 <img style="width: 140px; height: 50px; border-radius: 10px;" src="imagens/CREA-DF.jpg" alt="LOGO"">
             </a>
             </div>
-            <div style="margin-left:450px;">
+            <div style="margin-left:600px;">
                   <h2 id="titulo">DÍVIDA ATIVA</h2>
             </div>
           
@@ -196,7 +197,7 @@
                     <a href="{{route('home')}}"><i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;HOME</a>
                 </li>
                 <li>
-                    <a href="#"><i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Pesquisar</a>
+                    <a href="{{route('filtro')}}"><i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Pesquisar</a>
                 </li>
                 <li>
 
@@ -233,11 +234,11 @@
             <!-- Page Heading -->
             <div class="row" id="main" >
                 <div class="col-sm-12 col-md-12  justify-content-center" id="content">
+                    
                     <!--Iniciao-->
                     @yield('conteudo')
-
+                      
                     <!--Fim-->
-                
                 </div>
             </div>
             <!-- /.row -->
