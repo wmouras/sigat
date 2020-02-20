@@ -27,9 +27,6 @@
             <td>{{$user->valor_atualizado}}</td>
         </tr>
         @endforeach
-    
-    
-   
    
 </table>
 

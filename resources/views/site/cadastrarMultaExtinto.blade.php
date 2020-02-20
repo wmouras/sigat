@@ -3,7 +3,7 @@
 @section('conteudo')
 
 <div class="container well ">
-    <h2 style="margin-left:25%; margin-top:15px;margin-buttom:15px; ">CADASTRAR <MULTA-EXTINTO></MULTA-EXTINTO></h2>
+    <h2 style="margin-left:25%; margin-top:15px;margin-buttom:15px; ">CADASTRAR MULTA-EXTINTO <MULTA-EXTINTO></MULTA-EXTINTO></h2>
 <form action="{{route('formCadMulta')}}" class="form-horizontal" method="POST">
 @csrf
   <div class="form-group">

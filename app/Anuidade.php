@@ -10,7 +10,7 @@ class Anuidade extends Model
         'nome', 'numero', 'cpf_cnpj','ef','data_debito','valor_originario',
     ];
     protected $guarded = ['anuidade_id'];
-    protected $table = 'tb_anuidade';
+    protected $table = 'tbanuidade';
     	
     public $timestamps = false;
 }

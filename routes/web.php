@@ -1,7 +1,4 @@
 <?php
-
-Route::get('/divida-ativa','DividaAtiva\\dividaController@index')->name('home');
-
 Route::get('/filtro',function(){
     return view('site.filtro');
 })->name('filtro');
@@ -23,10 +20,6 @@ Route::get('/cadMultaExtinto', function(){
     return view('site.cadastrarMultaExtinto');
 }   )->name('multaExtinto');
 
-Route::post('/pdfAnuidadeAno','Anuidades\\anuidadeController@gerarPdfAno' )->name('pdfAnuidadeAno');
-
-Route::post('/pdfAnuidadeMes','Anuidades\\anuidadeController@gerarPdfMes' )->name('pdfAnuidadeMes');
-
 Route::get('/relatorioAnuidade', function(){
     return view('site.relatorioAnuidade');
 })->name('rAnuidade');
@@ -39,11 +32,20 @@ Route::get('/editar', function(){
     return view('site.editarRegistro');
 })->name('editarRegistro');
 
-
 Route::post('/formCadAnuidade','Anuidades\\anuidadeController@store')->name('formCadAnuidade');
 
 Route::post('/formCadMulta','Multas\\multaController@store')->name('formCadMulta');
 
 Route::post('/buscar','DividaAtiva\\dividaController@busca')->name('buscarUsuario');
+
+Route::post('/pdfAnuidadeAno','Anuidades\\anuidadeController@gerarPdfAno' )->name('pdfAnuidadeAno');
+
+Route::post('/pdfAnuidadeMes','Anuidades\\anuidadeController@gerarPdfMes' )->name('pdfAnuidadeMes');
+
+Route::post('/pdfMultaAno','Multas\\multaController@gerarPdfAno' )->name('pdfMultaAno');
+
+Route::post('/pdfMultaMes','Multas\\multaController@gerarPdfMes' )->name('pdfMultaMes');
+
+Route::get('/divida-ativa','DividaAtiva\\dividaController@index')->name('home');
 
 

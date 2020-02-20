@@ -58,10 +58,7 @@ class multaController extends Controller
             $user->quitado = 0;
         }
         $user->save();
-        $mensagem = 'Anuidade Multa cadastrada!';
-        return redirect()->route('home',[
-            'mensagem' => $mensagem
-        ]);
+        return redirect()->route('home');
     }
 
   
@@ -73,8 +70,8 @@ class multaController extends Controller
     public function gerarPdfAno(Request $request){
         $ano = $request->inicial;
         $lista = new Multa;
-        $result=$lista::where('anuidade_inicial',$ano)->get();
-        return view('site.pdfAnuidade',[
+        $result=$lista::where('data_debito',$ano)->get();
+        return view('site.pdfMulta',[
             'lista' =>$result
         ]);
     }

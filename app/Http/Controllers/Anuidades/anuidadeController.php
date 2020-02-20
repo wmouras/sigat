@@ -36,27 +36,31 @@ class anuidadeController extends Controller
      */
     public function store(Request $request)
     {
+
+        $data = date('Y-m-d', strtotime($request->data_debito));
+        $valor_originario = str_replace(',','',$request->valorOriginario);
+
         $user = new Anuidade;
         $user->nome = $request->nome;
         $user->numero = $request->processo;
         $user->ef=$request->ef;
         $user->cpf_cnpj = $request->cpf_cnpj;
-        $user->data_debito = $request->data_debito;
+        $user->data_debito = $data;
         $user->anuidade_inicial = $request->anuidadeInicial;
         $user->anuidade_final = $request->anuidadeFinal;
-        $user->valor_originario = $request->valorOriginario;
+        $user->valor_originario = $valor_originario;
         $user->valor_atualizado = $request->valorAtualizado;
-        $user->valorAnuidade = 0.00;
-        $user->valorAnuidadeAtualizado = 0.00;
+        $user->valor_anuidade = 0;
+        $user->valor_anuidade_atualizado = 0;
 
         if($request->situacao == 1){
             $user->ativo = 1;
             $user->extinto = 0;
-            $user->quitado = 0;
+            
         }elseif($request->situacao == 0){
             $user->ativo = 0;
             $user->extinto = 1;
-            $user->quitado = 0;
+            
         }
         $user->save();
         $mensagem = 'Anuidade Cadastrada!';
@@ -78,15 +82,13 @@ class anuidadeController extends Controller
 
     public function gerarPdfAno(Request $request){
         $ano = $request->inicial;
+        $situacao = $request->situacao;
         $lista = new Anuidade;
-        $result=$lista::where('anuidade_inicial',$ano)->get(); 
-        $mensagem = 'achou';
-           if(empty($result)){
-               $mensagem ='nada';
-           }
+        $result=$lista::where([['anuidade_inicial','=',$ano],['ativo',$situacao]])->get(); 
+        
         return view('site.pdfAnuidade',[
             'lista' =>$result,
-            'mensagem' =>$mensagem
+            'mensagem' =>'$mensagem'
         ]);
     }
 

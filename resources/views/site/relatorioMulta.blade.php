@@ -86,17 +86,18 @@
                         
                     </div>
                     <div class="panel-body text-center">
-                    <form class="form-inline">
+                    <form class="form-inline" action="{{route('pdfMultaAno')}}" class="form-inline" method="POST">
+                    @csrf
                         <div class="form-group">
                             <div class="input-group">
-                            <div class="input-group-addon">Anuidade inicial</div>
+                            <div class="input-group-addon">Mês inicial</div>
                             <input type="text" class="form-control" id="exampleInputAmount" placeholder="Exemplo 2019">
                             </div>
                         </div>
 
                         <div style="margin-top: 20px;" class="form-group">
                            <div class="input-group">
-                           <div class="input-group-addon">Anuidade Final&nbsp;</div>
+                           <div class="input-group-addon">Mês Final&nbsp;</div>
                            <input type="text" class="form-control" id="exampleInputAmount" placeholder="Exemplo 2020">
                            </div>
                        </div>

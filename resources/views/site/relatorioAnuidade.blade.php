@@ -61,12 +61,15 @@
   justify-content: space-around;
   height:100%;
 }
+div#optSelect{
+    margin:5%;
+}
 </style>
 <h1 style="margin-left:32%;">Relátorios Anuidades</h1>
 <div id="itens" class="container-fluid well">
 
 <!-- Card 1 -->  
-<div class="col-lg-4 col-md-4 col-sm-6 col-sm-12 col-xs-12">
+<div class="col-lg-4 col-md-4 col-sm-6 col-sm-6 col-xs-12">
     <div class="card-container">
         <div class="flipper">
             <div class="front">
@@ -84,34 +87,53 @@
                         
                     </div>
                     <div class="panel-body text-center">
-                    <form action="{{route('pdfAnuidadeAno')}}" class="form-inline" method="POST">
+                        <div class="col-md-4 mb-6" id="optSelect">
+                          <label for="inputGroupSelect01" class=" col-form-label">SITUAÇÃO:</label>
+                          <select name="selectAnuidadeAnual" class="custom-select" id="selectAnuidadeAnual" required >
+                            <option selected>Selecione...</option>
+                            <option value="AnuidadeAtivo">Em Dívida Ativa</option>
+                            <option value="AnuidadeExtinto">Extintos</option>
+                          </select>
+                        </div>  
+                    
+                    <form style ="display:none;" id="form1AnuidadeAnual" action="{{route('pdfAnuidadeAno')}}" class="form-inline" method="POST">
                     @csrf
                         <div class="form-group">
                             <div class="input-group">
                             <div class="input-group-addon">Anuidade inicial</div>
-                            <input type="text" name="inicial" class="form-control" id="exampleInputAmount" placeholder="Exemplo 2019">
+                            <input type="text" name="inicial" class="form-control" placeholder="Exemplo 2019">
+                            </div>
+                        </div>
+                        <div style="display:none;" class="form-group">
+                            <div class="input-group">
+                            <div class="input-group-addon">valor</div>
+                            <input type="text" name="situacao" class="form-control" value="1">
                             </div>
                         </div>
 
-                        <div style="margin-top: 20px;" class="form-group">
-                           <div class="input-group">
-                           <div class="input-group-addon">Anuidade Final&nbsp;</div>
-                           <input type="text" class="form-control" id="exampleInputAmount" placeholder="Exemplo 2020">
-                           </div>
-                       </div>
                        <hr>
-                        <button  type="submit" class="btn btn-primary">Gerar PDF</button>
+                        <button  type="submit" class="btn btn-primary">Filtrar</button>
                     </form>
-                    </div>
-                </div>
-            </div>
-            
-        <div class="back">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Escolha um opção</div>
-                    <div class="panel-body text-center">
-                        <p><a class="btn btn-primary btn-lg" href="#" title="#">Ver no Browser</a></p>
-                        <p><a class="btn btn-primary btn-lg" href="#" title="#">Download</a></p>
+
+                    <form style="display:none;" id="form2AnuidadeAnual" action="{{route('pdfAnuidadeAno')}}" class="form-inline" method="POST">
+                    @csrf
+                        <div class="form-group">
+                            <div class="input-group">
+                            <div class="input-group-addon">Anuidade inicial</div>
+                            <input type="text" name="inicial" class="form-control"  >
+                            </div>
+                        </div>
+                        <div style="display:none;" class="form-group">
+                            <div class="input-group">
+                            <div class="input-group-addon">valor</div>
+                            <input type="text" name="situacao" class="form-control" value="0">
+                            </div>
+                        </div>
+
+                     
+                       <hr>
+                        <button  type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
                     </div>
                 </div>
             </div>
@@ -139,7 +161,15 @@
                         
                     </div>
                     <div class="panel-body text-center">
-                    <form action="{{route('pdfAnuidadeMes')}}" class="form-inline" method="POST">
+                        <div class="col-md-4 mb-6" id="optSelect">
+                          <label for="inputGroupSelect01" class=" col-form-label">SITUAÇÃO:</label>
+                          <select name="selectAnuidadeMes" class="custom-select" id="selectAnuidadeMes" required >
+                            <option selected>Selecione...</option>
+                            <option value="AnuidadeAtivo">Em Dívida Ativa</option>
+                            <option value="AnuidadeExtinto">Extintos</option>
+                          </select>
+                        </div>  
+                    <form style="display:none;" id="form1AnuidadeMes" action="{{route('pdfAnuidadeMes')}}" class="form-inline" method="POST">
                     @csrf
                         <div class="form-group">
                             <div class="input-group">
@@ -147,42 +177,154 @@
                             <input type="text" name='mes' class="form-control" id="exampleInputAmount" placeholder="Exemplo 01/2019">
                             </div>
                         </div>
+                        <div style="display:none;" class="form-group">
+                            <div class="input-group">
+                            <div class="input-group-addon">valor</div>
+                            <input type="text" name="situacao" class="form-control" value="1">
+                            </div>
+                        </div>
 
-                        <div style="margin-top: 20px;" class="form-group">
-                           <div class="input-group">
-                           <div class="input-group-addon">Anuidade Final&nbsp;</div>
-                           <input type="text" class="form-control" id="exampleInputAmount" placeholder="Exemplo 05/2020">
-                           </div>
-                       </div>
                        <hr>
-                        <button  type="submit" class="btn btn-primary">Gerar PDF</button>
+                        <button  type="submit" class="btn btn-primary">Filtrar</button>
+                    </form>
+                    <form style="display:none;" id="form2AnuidadeMes" action="{{route('pdfAnuidadeMes')}}" class="form-inline" method="POST">
+                    @csrf
+                        <div class="form-group">
+                            <div class="input-group">
+                            <div class="input-group-addon">Anuidade inicial</div>
+                            <input type="text" name='mes' class="form-control" id="exampleInputAmount" placeholder="Exemplo ">
+                            </div>
+                        </div>
+
+                        <div style="display:none;" class="form-group">
+                            <div class="input-group">
+                            <div class="input-group-addon">valor</div>
+                            <input type="text" name="situacao" class="form-control" value="0">
+                            </div>
+                        </div>
+
+                       <hr>
+                        <button  type="submit" class="btn btn-primary">Filtrar</button>
                     </form>
                     </div>
                 </div>
             </div>
             
-        <div class="back">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Escolha um opção</div>
-                    <div class="panel-body text-center">
-                        <p><a class="btn btn-primary btn-lg" href="#" title="#">Ver no Browser</a></p>
-                        <p><a class="btn btn-primary btn-lg" href="#" title="#">Download</a></p>
-                    </div>
-                </div>
-            </div>
       </div>
     </div>
     
 </div>
-<!-- Card 2 -->   
+<!-- Card 2 -->  
+
+<!-- Card 3 -->  
+<div class="col-lg-4 col-md-4 col-sm-6 col-sm-12 col-xs-12">
+    <div class="card-container">
+        <div class="flipper">
+            <div class="front">
+            <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div id="cardAnual" class="row">
+                             <div class="col-md-3">	
+                                <img id="pdf" src="imagens/pdf.png" alt="">
+                            </div>
+
+                            <div>	
+                                <h3>RELATÓRIO TODOS</h3>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="panel-body text-center">
+                    <div class="col-md-4 mb-6" id="optSelect">
+                          <label for="inputGroupSelect01" class=" col-form-label">SITUAÇÃO:</label>
+                          <select name="selectAnuidadeTodos" class="custom-select" id="selectAnuidadeTodos" required >
+                            <option selected>Selecione...</option>
+                            <option value="AnuidadeAtivo">Em Dívida Ativa</option>
+                            <option value="AnuidadeExtinto">Extintos</option>
+                          </select>
+                        </div>  
+                    <form style="display:none;" id="form1AnuidadeTodos" action="" class="form-inline" method="POST">
+                    @csrf
+                    <div style="display:none;" class="form-group">
+                            <div class="input-group">
+                            <div class="input-group-addon">valor</div>
+                            <input type="text" name="situacao" class="form-control" value="ativo">
+                            </div>
+                        </div>
+    
+                        <button  type="submit" class="btn btn-primary">Filtrar Ativos</button>
+                    </form>
+
+                    <form style="display:none;" id="form2AnuidadeTodos" action="" class="form-inline" method="POST">
+                    @csrf
+                    <div style="display:none;" class="form-group">
+                            <div class="input-group">
+                            <div class="input-group-addon">valor</div>
+                            <input type="text" name="situacao" class="form-control" value="extinto">
+                            </div>
+                        </div>
+    
+                        <button  type="submit" class="btn btn-primary">Filtrar Extinos</button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+            
+      </div>
+    </div>
+    
+</div>
+
 </div>
 
 <script>
-$(document).ready(function(){ //loads script after the page is loaded
-  $('.').click(function(){ // When the element card-container is click it triggers the function
-  	$(this).toggleClass("flipped"); // Finds the element and toggles the class called flipped to let you know the card is currently flipped or active
-    	$('.card-container .flipped').toggle("flipper"); // If the card-container element also contains the class flipped it will toggle the flip
-  });
+//SELECT RELÁTORIO ANUIDADES
+$(document).on('click', '#selectAnuidadeAnual', function(){
+  var tipoCade = $('#selectAnuidadeAnual').val();
+  
+  if(tipoCade == 'AnuidadeAtivo'){
+    $('#form1AnuidadeAnual').css('display','block')
+    $('#form2AnuidadeAnual').css('display','none')
+
+
+  }else if(tipoCade == 'AnuidadeExtinto'){
+    
+    $('#form1AnuidadeAnual').css('display','none')
+    $('#form2AnuidadeAnual').css('display','block')
+  }
+});
+
+
+//SELECT RELÁTORIO MULTAS
+$(document).on('click', '#selectAnuidadeMes', function(){
+  var tipoCade = $('#selectAnuidadeMes').val();
+  
+  if(tipoCade == 'AnuidadeAtivo'){
+    $('#form1AnuidadeMes').css('display','block')
+
+    $('#form2AnuidadeMes').css('display','none')
+
+  }else if(tipoCade == 'AnuidadeExtinto'){
+    
+    $('#form1AnuidadeMes').css('display','none')
+    $('#form2AnuidadeMes').css('display','block')
+  }
+});
+
+//SELECT RELÁTORIO TODOS
+$(document).on('click', '#selectAnuidadeTodos', function(){
+  var tipoCade = $('#selectAnuidadeTodos').val();
+  
+  if(tipoCade == 'AnuidadeAtivo'){
+    $('#form1AnuidadeTodos').css('display','block')
+
+    $('#form2AnuidadeTodos').css('display','none')
+
+  }else if(tipoCade == 'AnuidadeExtinto'){
+    
+    $('#form1AnuidadeTodos').css('display','none')
+    $('#form2AnuidadeTodos').css('display','block')
+  }
 });
 </script>
 @endsection
