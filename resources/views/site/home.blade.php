@@ -18,6 +18,7 @@ img#img-acessoRapido{
 }
 
 </style>
+
 <div id='section' class="col-sm-12 col-md-12 well" id="content">
     <div class="container">
         <div class="row">
@@ -51,6 +52,9 @@ img#img-acessoRapido{
     </div>
 </div>
  
+@if(isset($mensagem))
+<div>{{$mensagem}}</div>
+@endif
 <h3 style="margin-left:40%;">ACESSO RÁPIDO</h3>
 <div id='section' class="col-sm-12 col-md-12 well" id="content">
     <div class="container">

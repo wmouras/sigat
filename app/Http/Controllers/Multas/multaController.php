@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Multas;
 use App\Http\Controllers\Controller;
 use App\Multa;
 use Illuminate\Http\Request;
+use App\Http\Requests\MultaRequest;
 
 class multaController extends Controller
 {
@@ -34,7 +35,7 @@ class multaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MultaRequest $request)
     {
         $user = new Multa;
         $user->nome = $request->nome;

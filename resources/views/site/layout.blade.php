@@ -179,7 +179,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="{{route('home')}}">
-                <img style="width: 140px; height: 50px; border-radius: 10px;" src="imagens/CREA-DF.jpg" alt="LOGO"">
+                <img style="width: 140px; height: 50px; border-radius: 10px;" src="imagens/CREA-DF.jpg" alt="LOGO">
             </a>
             </div>
             <div style="margin-left:600px;">
@@ -197,18 +197,18 @@
                     <a href="{{route('home')}}"><i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;HOME</a>
                 </li>
                 <li>
-                    <a href="{{route('filtro')}}"><i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Pesquisar</a>
+                    <a href="{{route('filtro')}}"><i class="fa fa-search"></i>&nbsp;&nbsp;Pesquisar</a>
                 </li>
                 <li>
 
-                    <a href="#" data-toggle="collapse" data-target="#submenu-1"><i class="glyphicon glyphicon-list-alt"></i>&nbsp;&nbsp;Cadastrar Anuidade<i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                    <a href="#" data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-paste"></i>&nbsp;&nbsp;Cadastrar Anuidade<i class="fa fa-fw fa-angle-down pull-right"></i></a>
                     <ul id="submenu-1" class="collapse">
                         <li><a href="{{route('anuidadeAtivo')}}"><i class="fa fa-angle-double-right"></i>Em divida ativa</a></li>
                         <li><a href="{{route('anuidadeExtinto')}}"><i class="fa fa-angle-double-right"></i>Extinto</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#" data-toggle="collapse" data-target="#submenu-2"><i class="glyphicon glyphicon-list-alt"></i>&nbsp;&nbsp;Cadastrar Multa<i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                    <a href="#" data-toggle="collapse" data-target="#submenu-2"><i class="fa fa-paste"></i>&nbsp;&nbsp;Cadastrar Multa<i class="fa fa-fw fa-angle-down pull-right"></i></a>
                     <ul id="submenu-2" class="collapse">
                         <li><a href="{{route('multaAtivo')}}"><i class="fa fa-angle-double-right"></i>Em divida ativa</a></li>
                         <li><a href="{{route('multaExtinto')}}"><i class="fa fa-angle-double-right"></i>Extinto</a></li>
@@ -216,11 +216,11 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{route('rAnuidade')}}" ><i class="glyphicon glyphicon-zoom-in"></i>&nbsp;&nbsp;Relatórios Anuidade</a>
+                    <a href="{{route('rAnuidade')}}" ><i class="fa fa-file"></i>&nbsp;&nbsp;Relatórios Anuidade</a>
             
                 </li>
                 <li>
-                    <a href="{{route('rMulta')}}" ><i class="glyphicon glyphicon-zoom-in"></i>&nbsp;&nbsp;Relatórios Multa</a>
+                    <a href="{{route('rMulta')}}" ><i class="fa fa-file"></i>&nbsp;&nbsp;Relatórios Multa</a>
                   
                 </li>
               

@@ -52,4 +52,25 @@ class dividaController extends Controller
        ]);
 
     }
+    public function edit(Anuidade $user){
+            return view('site.editarRegistro',[
+                'user'=>$user
+            ]);
+        
+
+    }
+    public function editar(Anuidade $user, Request $request){
+            /*$user->nome = $request->nome;
+            $user->cpf_cnpj = $request->cpf_cnpj;
+            $user->numero = $request->numero;
+            $user->ef = $request->ef;
+            $user->anuidade_inicial = $request->anuidade_inicial;
+            $user->anuidade_final = $request->anuidade_final;
+            $user->valor_originario = $request->anuidade_originario;
+            $user->save();
+
+            return redirect()->route('home');*/
+            dd($user,$request);
+
+    }
 }

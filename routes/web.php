@@ -28,9 +28,9 @@ Route::get('/relatorioMulta', function(){
     return view('site.relatorioMulta');
 })->name('rMulta');
 
-Route::get('/editar', function(){
-    return view('site.editarRegistro');
-})->name('editarRegistro');
+Route::get('/edit/{user}', 'DividaAtiva\\dividaController@edit')->name('editRegistro');
+
+Route::put('/editar/{user}', 'DividaAtiva\\dividaController@editar')->name('editarRegistro');
 
 Route::post('/formCadAnuidade','Anuidades\\anuidadeController@store')->name('formCadAnuidade');
 

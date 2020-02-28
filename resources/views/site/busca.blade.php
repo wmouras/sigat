@@ -26,6 +26,7 @@
  
 @foreach($resultado as $user)
 <tr>
+      <td style="display:none">{{$user->id}}</td>
       <td>{{$user->nome}}</td>
       <td>{{$user->numero}}</td>
       <td>{{$user->ef}}</td>
@@ -37,7 +38,7 @@
       @else
       <td>Extinto</td>
       @endif
-      <td><a href="{{route('editarRegistro')}}"><button type="button" class="btn btn-primary" >Editar</button></a></td>
+      <td><a href="{{route('editRegistro',['user'=>$user->id])}}"><button type="button" class="btn btn-primary" >Editar</button></a></td>
      </tr>
 @endforeach
  

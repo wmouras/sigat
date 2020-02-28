@@ -6,6 +6,8 @@ use App\Anuidade;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\AnuidadeRequest;
+
 class anuidadeController extends Controller
 {
     /**
@@ -34,12 +36,12 @@ class anuidadeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AnuidadeRequest $request)
     {
 
         $data = date('Y-m-d', strtotime($request->data_debito));
         $valor_originario = str_replace(',','',$request->valorOriginario);
-
+        
         $user = new Anuidade;
         $user->nome = $request->nome;
         $user->numero = $request->processo;
