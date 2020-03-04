@@ -25,7 +25,7 @@ class AnuidadeRequest extends FormRequest
     {
         return [
                 'nome' => 'required',
-                'cpf_cnpj'=>'required',
+                'cpf_cnpj'=>'required|numeric',
                 'processo'=>'required',
                 'data_debito' =>'required',
                 'ef' =>'required',
@@ -39,6 +39,7 @@ class AnuidadeRequest extends FormRequest
         return [
             "nome.required"=>"O Campo 'Nome' é obrigatório",
             "cpf_cnpj.required"=>"O Campo 'Cpf/Cnpj' é obrigatório",
+            "cpf_cnpj.numeric"=>"Digite o Campo cpf/cnpj sem pontos, traços ou barra Ex: Ex1234567891011",
             "processo.required"=>"O Campo 'Processo' é obrigatório",
             "data_debito.required"=>"O Campo 'Data do débito' é obrigatório",
             "ef.required"=>"O Campo 'Ef' é obrigatório",

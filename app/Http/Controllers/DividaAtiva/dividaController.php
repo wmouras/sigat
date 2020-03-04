@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Multa;
 use App\Anuidade;
+use App\Http\Requests\AnuidadeRequest;
 class dividaController extends Controller
 {
     public function index(){
@@ -21,7 +22,6 @@ class dividaController extends Controller
         $totalRecebidoAnuidadeExtintos = $totalAnuidadeExtintos->sum('valor_originario');
         $totalRecebidoMultaExtintos = $totalMultaExtintos->sum('valor_atualizado');
 
-       
         return view('site.home',[
             'totalAnuidade'=>$totalRecebidoAnuidade,
             'totalMulta' => $totalRecebidoMulta,
@@ -31,46 +31,45 @@ class dividaController extends Controller
     }
     public function busca(Request $request){
         $opcao = $request->select;
-        $result = '';
-        $mensagem ='';
+     
        
         if($opcao == 'anuidade'){
             $mensagem = "Resultados encontrados por: '$request->busca'";
             $usuarioAnuidade = new Anuidade;
             $result = $usuarioAnuidade::where('nome','LIKE','%'.$request->busca.'%')->get();
-           
+            return view('site.filtro',[
+                'resultado' => $result,
+                'mensagem' =>$mensagem,
+                
+            ]);
             
         }elseif($opcao == 'multa'){
             $usuarioMulta = new Multa;
             $result = $usuarioMulta::where('nome','LIKE','%'.$request->busca.'%')->get();
             $mensagem = 'Lista de Multas';
+            return view('site.filtro',[
+                'resultado' => $result,
+                'mensagem' =>$mensagem,
+                
+            ]);
+        }elseif($opcao == 'Selecione'){
+            session()->flash('msg', 'Escolha uma opção.');
+            return redirect()->back();
         }
-       return view('site.busca',[
-           'resultado' => $result,
-           'mensagem' =>$mensagem,
-           
-       ]);
+      
 
     }
     public function edit(Anuidade $user){
             return view('site.editarRegistro',[
                 'user'=>$user
             ]);
-        
 
     }
     public function editar(Anuidade $user, Request $request){
-            /*$user->nome = $request->nome;
-            $user->cpf_cnpj = $request->cpf_cnpj;
-            $user->numero = $request->numero;
-            $user->ef = $request->ef;
-            $user->anuidade_inicial = $request->anuidade_inicial;
-            $user->anuidade_final = $request->anuidade_final;
-            $user->valor_originario = $request->anuidade_originario;
-            $user->save();
-
-            return redirect()->route('home');*/
-            dd($user,$request);
+            
+            $user->update($request->all());
+            session()->flash('msg', 'Atualizado com sucesso!.');
+            return redirect()->back();
 
     }
 }

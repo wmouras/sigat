@@ -12,14 +12,18 @@
   </div>
 @endif
 
+@if(Session::has('msg'))
+  <div  class='alert alert-success'><h1>{!! Session::has('msg') ? Session::get("msg") : '' !!}</h1></div>
+@endif
+
 <div class="container well ">
     <h2 style="margin-left:25%; margin-top:15px;margin-buttom:15px; ">CADASTRAR ANUIDADE-ATIVO</h2>
 <form action="{{route('formCadAnuidade')}}" class="form-horizontal" method="POST">
 @csrf
   <div class="form-group">
-    <label for="inputEmail3" class="col-sm-2 control-label">NOME *</label>
+    <label for="inputEmail3" class="col-sm-2 control-label" >NOME *</label>
     <div class="col-sm-6">
-      <input type="text" name="nome" class="form-control" id="inputNome" placeholder="Nome completo" value="{{old('nome')}}">
+      <input type="text" name="nome" class="form-control" id="inputNome" placeholder="Nome completo" value="{{old('nome')}}" onkeyup="maiuscula(this)">
     </div>
   </div>
 
@@ -27,6 +31,7 @@
     <label for="inputPassword3" class="col-sm-2 control-label">CPF/CNPJ *</label>
     <div class="col-sm-6">
       <input type="text" name="cpf_cnpj" class="form-control" id="inputCpf/cnpf" placeholder="DIGITE O CPF/CNPJ" value="{{old('cpf_cnpj')}}">
+      <p>Obs:Digite sem pontos, traços ou barras. Ex: 1234567891011</p>
     </div>
   </div>
 
@@ -88,8 +93,7 @@
     </div>
   </div>
 
- 
-  
+
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-primary">Cadastrar</button>
@@ -97,5 +101,12 @@
   </div>
 </form>
 </div>
+
+<script>
+function maiuscula(z){
+    v = z.value.toUpperCase();
+    z.value = v;
+}
+</script>
 
 @endsection

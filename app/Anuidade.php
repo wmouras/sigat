@@ -11,6 +11,9 @@ class Anuidade extends Model
     ];
     protected $guarded = ['anuidade_id'];
     protected $table = 'tbanuidade';
-    	
+   
+
+   
     public $timestamps = false;
+
 }

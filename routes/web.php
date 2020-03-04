@@ -49,3 +49,5 @@ Route::post('/pdfMultaMes','Multas\\multaController@gerarPdfMes' )->name('pdfMul
 Route::get('/divida-ativa','DividaAtiva\\dividaController@index')->name('home');
 
 
+
+

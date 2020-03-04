@@ -5,42 +5,30 @@ namespace App\Http\Controllers\Anuidades;
 use App\Anuidade;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 
 use App\Http\Requests\AnuidadeRequest;
 
 class anuidadeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
         return view('cadastrarAnuidade');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(AnuidadeRequest $request)
     {
-
-        $data = date('Y-m-d', strtotime($request->data_debito));
-        $valor_originario = str_replace(',','',$request->valorOriginario);
+        $dat = str_replace('/','-',$request->data_debito);
+        $data = date('Y-m-d', strtotime($dat));
         
         $user = new Anuidade;
         $user->nome = $request->nome;
@@ -50,7 +38,7 @@ class anuidadeController extends Controller
         $user->data_debito = $data;
         $user->anuidade_inicial = $request->anuidadeInicial;
         $user->anuidade_final = $request->anuidadeFinal;
-        $user->valor_originario = $valor_originario;
+        $user->valor_originario = $request->valorOriginario;
         $user->valor_atualizado = $request->valorAtualizado;
         $user->valor_anuidade = 0;
         $user->valor_anuidade_atualizado = 0;
@@ -65,18 +53,12 @@ class anuidadeController extends Controller
             
         }
         $user->save();
-        $mensagem = 'Anuidade Cadastrada!';
-        return redirect()->route('home',[
-            'mensagem' => $mensagem
-        ]);
+        
+        session()->flash('msg', 'Cadastrado com sucesso!.');
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Anuidade  $anuidade
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Anuidade $anuidade)
     {
        
@@ -104,38 +86,18 @@ class anuidadeController extends Controller
         ]);
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Anuidade  $anuidade
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Anuidade $anuidade)
     {
-        //
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Anuidade  $anuidade
-     * @return \Illuminate\Http\Response
-     */
+  
     public function update(Request $request, Anuidade $anuidade)
     {
-        //
+        
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Anuidade  $anuidade
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Anuidade $anuidade)
     {
-        //
+        
     }
 }
