@@ -64,27 +64,7 @@ class anuidadeController extends Controller
        
     }
 
-    public function gerarPdfAno(Request $request){
-        $ano = $request->inicial;
-        $situacao = $request->situacao;
-        $lista = new Anuidade;
-        $result=$lista::where([['anuidade_inicial','=',$ano],['ativo',$situacao]])->get(); 
-        
-        return view('site.pdfAnuidade',[
-            'lista' =>$result,
-            'mensagem' =>'$mensagem'
-        ]);
-    }
-
-    public function gerarPdfMes(Request $request){
-        $mes = $request->mes;
-        $lista = new Anuidade;
-        $result=$lista::where('data_debito',$mes)->get();
-        
-        return view('site.pdfAnuidade',[
-            'lista' =>$result
-        ]);
-    }
+   
 
     public function edit(Anuidade $anuidade)
     {

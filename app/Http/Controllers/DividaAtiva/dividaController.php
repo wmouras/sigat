@@ -34,24 +34,24 @@ class dividaController extends Controller
      
        
         if($opcao == 'anuidade'){
-            $mensagem = "Resultados encontrados por: '$request->busca'";
-            $usuarioAnuidade = new Anuidade;
-            $result = $usuarioAnuidade::where('nome','LIKE','%'.$request->busca.'%')->get();
-            return view('site.filtro',[
-                'resultado' => $result,
-                'mensagem' =>$mensagem,
-                
-            ]);
+                $mensagem = "Resultados encontrados por: '$request->busca'";
+                $usuarioAnuidade = new Anuidade;
+                $result = $usuarioAnuidade::where('nome','LIKE','%'.$request->busca.'%')->get();
+                return view('site.filtro',[
+                    'resultado' => $result,
+                    'mensagem' =>$mensagem,
+                    
+                ]);
             
         }elseif($opcao == 'multa'){
-            $usuarioMulta = new Multa;
-            $result = $usuarioMulta::where('nome','LIKE','%'.$request->busca.'%')->get();
-            $mensagem = 'Lista de Multas';
-            return view('site.filtro',[
-                'resultado' => $result,
-                'mensagem' =>$mensagem,
-                
-            ]);
+                $usuarioMulta = new Multa;
+                $result = $usuarioMulta::where('nome','LIKE','%'.$request->busca.'%')->get();
+                $mensagem = 'Lista de Multas';
+                return view('site.filtro',[
+                    'resultado' => $result,
+                    'mensagem' =>$mensagem,
+                    
+                ]);
         }elseif($opcao == 'Selecione'){
             session()->flash('msg', 'Escolha uma opção.');
             return redirect()->back();
@@ -71,5 +71,81 @@ class dividaController extends Controller
             session()->flash('msg', 'Atualizado com sucesso!.');
             return redirect()->back();
 
+    }
+
+    public function gerarPdfAno(Request $request){
+
+        if($request->tipo == 'anuidade'){
+                $ano = $request->inicial;
+                $situacao = $request->situacao;
+                $lista = new Anuidade;
+                $result = $lista::Raw('SELECT * FROM tbanuidade')->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+                return view('site.pdf',[
+                    'lista' =>$result,
+                    'mensagem' =>'$mensagem'
+                ]);
+           
+        }elseif($request->tipo == 'multa'){
+                $ano = $request->inicial;
+                $situacao = $request->situacao;
+                $lista = new Multa;
+                $result = $lista::Raw('SELECT * FROM tb_multa')->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+                return view('site.pdf',[
+                    'lista' =>$result,
+                    'mensagem' =>'$mensagem'
+                ]);
+        }
+           
+    }
+
+    public function gerarPdfMes(Request $request){
+        if($request->tipo == 'anuidade'){
+                $situacao = $request->situacao;
+                $array1 = explode('/',$request->mes);
+                $mes = $array1[0];
+                $ano = $array1[1];
+                $lista = new Anuidade;
+                $result = $lista::Raw('SELECT * FROM tbanuidade')->whereMonth('data_debito',$mes)->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+                return view('site.pdf',[
+                    'lista' =>$result,
+                    'mensagem' =>'$mensagem'
+                ]);
+            
+        }elseif($request->tipo == 'multa'){
+                $situacao = $request->situacao;
+                $array1 = explode('/',$request->mes);
+                $mes = $array1[0];
+                $ano = $array1[1];
+                $lista = new Multa;
+                $result = $lista::Raw('SELECT * FROM tb_multa')->whereMonth('data_debito',$mes)->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+                return view('site.pdf',[
+                    'lista' =>$result,
+                    'mensagem' =>'$mensagem'
+                ]);
+           
+        }
+            
+    }
+
+    public function gerarPdfTodos(Request $request){
+        if($request->tipo == 'anuidade'){
+                $situacao = $request->situacao;
+                $lista = new Anuidade;
+                $result = $lista::Raw('SELECT * FROM tbanuidade')->where('ativo',$situacao)->get();
+                return view('site.pdf',[
+                    'lista' =>$result,
+                    'mensagem' =>'$mensagem'
+                ]);
+        }elseif($request->tipo == 'multa'){
+                $situacao = $request->situacao;
+                $lista = new Multa;
+                $result = $lista::Raw('SELECT * FROM tb_multa')->where('ativo',$situacao)->get();
+                return view('site.pdf',[
+                    'lista' =>$result,
+                    'mensagem' =>'$mensagem'
+                ]);
+        }
+            
+            
     }
 }

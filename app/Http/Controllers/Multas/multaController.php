@@ -68,38 +68,18 @@ class multaController extends Controller
         //
     }
 
-    public function gerarPdfAno(Request $request){
-        $ano = $request->inicial;
-        $lista = new Multa;
-        $result=$lista::where('data_debito',$ano)->get();
-        return view('site.pdfMulta',[
-            'lista' =>$result
-        ]);
-    }
-
     public function edit(Multa $multa)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Multa  $multa
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, Multa $multa)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Multa  $multa
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy(Multa $multa)
     {
         //

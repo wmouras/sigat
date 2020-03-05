@@ -96,7 +96,7 @@ div#optSelect{
                           </select>
                         </div>  
                     
-                    <form style ="display:none;" id="form1AnuidadeAnual" action="{{route('pdfAnuidadeAno')}}" class="form-inline" method="POST">
+                    <form style ="display:none;" id="form1AnuidadeAnual" action="{{route('pdfAno')}}" class="form-inline" method="POST">
                     @csrf
                         <div class="form-group">
                             <div class="input-group">
@@ -108,6 +108,7 @@ div#optSelect{
                             <div class="input-group">
                             <div class="input-group-addon">valor</div>
                             <input type="text" name="situacao" class="form-control" value="1">
+                            <input type="text" name="tipo" class="form-control" value="anuidade">
                             </div>
                         </div>
 
@@ -115,7 +116,7 @@ div#optSelect{
                         <button  type="submit" class="btn btn-primary">Filtrar</button>
                     </form>
 
-                    <form style="display:none;" id="form2AnuidadeAnual" action="{{route('pdfAnuidadeAno')}}" class="form-inline" method="POST">
+                    <form style="display:none;" id="form2AnuidadeAnual" action="{{route('pdfAno')}}" class="form-inline" method="POST">
                     @csrf
                         <div class="form-group">
                             <div class="input-group">
@@ -127,6 +128,7 @@ div#optSelect{
                             <div class="input-group">
                             <div class="input-group-addon">valor</div>
                             <input type="text" name="situacao" class="form-control" value="0">
+                            <input type="text" name="tipo" class="form-control" value="anuidade">
                             </div>
                         </div>
 
@@ -169,7 +171,7 @@ div#optSelect{
                             <option value="AnuidadeExtinto">Extintos</option>
                           </select>
                         </div>  
-                    <form style="display:none;" id="form1AnuidadeMes" action="{{route('pdfAnuidadeMes')}}" class="form-inline" method="POST">
+                    <form style="display:none;" id="form1AnuidadeMes" action="{{route('pdfMes')}}" class="form-inline" method="POST">
                     @csrf
                         <div class="form-group">
                             <div class="input-group">
@@ -181,13 +183,14 @@ div#optSelect{
                             <div class="input-group">
                             <div class="input-group-addon">valor</div>
                             <input type="text" name="situacao" class="form-control" value="1">
+                            <input type="text" name="tipo" class="form-control" value="anuidade">
                             </div>
                         </div>
 
                        <hr>
                         <button  type="submit" class="btn btn-primary">Filtrar</button>
                     </form>
-                    <form style="display:none;" id="form2AnuidadeMes" action="{{route('pdfAnuidadeMes')}}" class="form-inline" method="POST">
+                    <form style="display:none;" id="form2AnuidadeMes" action="{{route('pdfMes')}}" class="form-inline" method="POST">
                     @csrf
                         <div class="form-group">
                             <div class="input-group">
@@ -200,6 +203,7 @@ div#optSelect{
                             <div class="input-group">
                             <div class="input-group-addon">valor</div>
                             <input type="text" name="situacao" class="form-control" value="0">
+                            <input type="text" name="tipo" class="form-control" value="anuidade">
                             </div>
                         </div>
 
@@ -243,24 +247,26 @@ div#optSelect{
                             <option value="AnuidadeExtinto">Extintos</option>
                           </select>
                         </div>  
-                    <form style="display:none;" id="form1AnuidadeTodos" action="" class="form-inline" method="POST">
+                    <form style="display:none;" id="form1AnuidadeTodos" action="{{route('pdfTodos')}}" class="form-inline" method="POST">
                     @csrf
                     <div style="display:none;" class="form-group">
                             <div class="input-group">
                             <div class="input-group-addon">valor</div>
-                            <input type="text" name="situacao" class="form-control" value="ativo">
+                            <input type="text" name="situacao" class="form-control" value="1">
+                            <input type="text" name="tipo" class="form-control" value="anuidade">
                             </div>
                         </div>
     
                         <button  type="submit" class="btn btn-primary">Filtrar Ativos</button>
                     </form>
 
-                    <form style="display:none;" id="form2AnuidadeTodos" action="" class="form-inline" method="POST">
+                    <form style="display:none;" id="form2AnuidadeTodos" action="{{route('pdfTodos')}}" class="form-inline" method="POST">
                     @csrf
                     <div style="display:none;" class="form-group">
                             <div class="input-group">
                             <div class="input-group-addon">valor</div>
-                            <input type="text" name="situacao" class="form-control" value="extinto">
+                            <input type="text" name="situacao" class="form-control" value="0">
+                            <input type="text" name="tipo" class="form-control" value="anuidade">
                             </div>
                         </div>
     

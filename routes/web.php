@@ -38,13 +38,13 @@ Route::post('/formCadMulta','Multas\\multaController@store')->name('formCadMulta
 
 Route::post('/buscar','DividaAtiva\\dividaController@busca')->name('buscarUsuario');
 
-Route::post('/pdfAnuidadeAno','Anuidades\\anuidadeController@gerarPdfAno' )->name('pdfAnuidadeAno');
 
-Route::post('/pdfAnuidadeMes','Anuidades\\anuidadeController@gerarPdfMes' )->name('pdfAnuidadeMes');
+Route::post('/pdfAno','DividaAtiva\\dividaController@gerarPdfAno' )->name('pdfAno');
 
-Route::post('/pdfMultaAno','Multas\\multaController@gerarPdfAno' )->name('pdfMultaAno');
+Route::post('/pdfMes','DividaAtiva\\dividaController@gerarPdfMes' )->name('pdfMes');
 
-Route::post('/pdfMultaMes','Multas\\multaController@gerarPdfMes' )->name('pdfMultaMes');
+Route::post('/pdfTodos','DividaAtiva\\dividaController@gerarPdfTodos' )->name('pdfTodos');
+
 
 Route::get('/divida-ativa','DividaAtiva\\dividaController@index')->name('home');
 

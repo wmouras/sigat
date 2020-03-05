@@ -38,13 +38,13 @@ img#img-acessoRapido{
         <div class="row">
             <div class="col-md-4">	
                 <div class="panel panel-success">
-                    <div style="text-align: center;" class="panel-heading"><h4> TOTAL DE ANUIDADES RECEBIDAS</h4></div>
+                    <div style="text-align: center;" class="panel-heading"><h4> TOTAL DE ANUIDADES-EXTINTOS</h4></div>
                     <div style="text-align: center;" class="panel-body"><h2>R$: {{number_format($totalAnuidadeExinto, 2, ',','.')}}</h2></div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="panel panel-success">
-                    <div style="text-align: center;" class="panel-heading"><h4>TOTAL DE MULTAS RECEBIDAS</h4></div>
+                    <div style="text-align: center;" class="panel-heading"><h4>TOTAL DE MULTAS-EXTINTOS</h4></div>
                     <div style="text-align: center;" class="panel-body"><h2>R$: {{number_format($totalMultaExinto, 2, ',','.')}}</h2></div>
                 </div>
             </div>
