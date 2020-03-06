@@ -58,6 +58,7 @@
     <label for="inputPassword3" class="col-sm-2 control-label">VALOR ORIGINÁRIO</label>
     <div class="col-sm-6">
       <input type="text" class="form-control" placeholder="R$: 000.00" name="valor_originario" value="{{$user->valor_originario}}">
+      
     </div>
   </div>
 

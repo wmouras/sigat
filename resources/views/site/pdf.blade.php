@@ -22,9 +22,9 @@
             <td>{{$user->nome}}</td>
             <td>{{$user->numero}}</td>
             <td>{{$user->ef}}</td>
-            <td>{{$user->data_debito}}</td>
-            <td>{{$user->valor_originario}}</td>
-            <td>{{$user->valor_atualizado}}</td>
+            <td>{{date('d/m/Y',strtotime($user->data_debito))}}</td>
+            <td>R$: {{ number_format($user->valor_originario, 2, ',','.')}}</td>
+            <td>R$: {{number_format($user->valor_atualizado, 2, ',','.')}}</td>
         </tr>
         @endforeach
     

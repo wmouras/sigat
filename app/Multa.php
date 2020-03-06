@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Multa extends Model
 {
     protected $fillable = [
-        'nome', 'numero', 'cpf_cnpj','ef','data_debito','valor_originario',
+        'nome', 'numero', 'cpf_cnpj','ef','data_debito','valor_originario','valor_atualizado','ativo','extinto'
     ];
-    protected $guarded = ['multa_id'];
-    protected $table = 'tb_multa';
+    protected $guarded = ['id'];
+    protected $table = 'tbmulta';
     	
     public $timestamps = false;
 }

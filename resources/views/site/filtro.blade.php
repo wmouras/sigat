@@ -31,11 +31,12 @@
       <td>Nome</td>
       <td>Processo</td>
       <td>Ef</td>
-      <td>Data do Debito</td>
+      <td>Data do Débito</td>
       <td>Valor Originário</td>
       <td>Valor Atualizado</td>
       <td>Situação</td>
       <td>Ação</td>
+  
   </tr>
     
     @if(isset($resultado))
@@ -45,15 +46,22 @@
             <td>{{$user->nome}}</td>
             <td>{{$user->numero}}</td>
             <td>{{$user->ef}}</td>
-            <td>{{$user->data_debito}}</td>
-            <td>{{$user->valor_originario}}</td>
-            <td>{{$user->valor_atualizado}}</td>
+            <td>{{date('d/m/Y',strtotime($user->data_debito))}}</td>
+            <td>R$: {{ number_format($user->valor_originario, 2, ',','.')}}</td>
+            <td>R$: {{number_format($user->valor_atualizado, 2, ',','.')}}</td>
             @if ($user->ativo == 1)
             <td>Em dívida ativa</td>
             @else
             <td>Extinto</td>
             @endif
-            <td><a href="{{route('editRegistro',['user'=>$user->id])}}"><button type="button" class="btn btn-primary" >Editar</button></a></td>
+            <td>
+            <form action = "{{route('editRegistro',['user'=>$user->id])}}" method="post">
+            @csrf
+                <input style="display:none" type="text" name = 'opcao' value="{{$opcao}}">
+                <input style="display:none" type="text" name = 'user' value="{{$user->id}}">
+                <a href=""><button type="submit" class="btn btn-primary" >Editar</button>
+            </form>
+            </td>
         </tr>
     @endforeach
     @endif

@@ -37,12 +37,15 @@ class multaController extends Controller
      */
     public function store(MultaRequest $request)
     {
+        $dat = str_replace('/','-',$request->data_debito);
+        $data = date('Y-m-d', strtotime($dat));
+
         $user = new Multa;
         $user->nome = $request->nome;
         $user->numero = $request->processo;
         $user->ef=$request->ef;
         $user->cpf_cnpj = $request->cpf_cnpj;
-        $user->data_debito = $request->data_debito;
+        $user->data_debito = $data;
         $user->valor_originario = $request->valorOriginario;
         $user->juros = 0.00;
         $user->correcaoMonetaria = 0.00;
@@ -52,11 +55,11 @@ class multaController extends Controller
         if($request->situacao == 1){
             $user->ativo = 1;
             $user->extinto = 0;
-            $user->quitado = 0;
+          
         }elseif($request->situacao == 0){
             $user->ativo = 0;
             $user->extinto = 1;
-            $user->quitado = 0;
+           
         }
         $user->save();
         return redirect()->route('home');

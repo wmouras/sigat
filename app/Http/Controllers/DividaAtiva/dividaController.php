@@ -12,14 +12,18 @@ class dividaController extends Controller
     public function index(){
         $anuidade = new Anuidade;
         $multa = new Multa;
-        $totalAnuidade = $anuidade::Raw('SELECT valor_originario FROM tbanuidade')->where('ativo',1)->get();
-        $totalMulta = $multa::Raw('SELECT valor_atualizado FROM tb_multa')->where('ativo',1)->get();
+        //===================PEGA AS SOMAS DAS COLUNAS DOS ATIVOS================================
+        $totalAnuidade = $anuidade::select('valor_originario')->where('ativo',1)->get();
         $totalRecebidoAnuidade = $totalAnuidade->sum('valor_originario');
+
+        $totalMulta = $multa::select('valor_atualizado')->where('ativo',1)->get();
         $totalRecebidoMulta = $totalMulta->sum('valor_atualizado');
 
-        $totalAnuidadeExtintos = $anuidade::Raw('SELECT valor_originario FROM tbanuidade ')->where('ativo',0)->get();
-        $totalMultaExtintos = $multa::Raw('SELECT valor_atualizado FROM tb_multa')->where('ativo',0)->get();
+        //===================PEGA AS SOMAS DAS COLUNAS DOS EXTINTOS==============================
+        $totalAnuidadeExtintos = $anuidade::select('valor_originario')->where('extinto',1)->get();
         $totalRecebidoAnuidadeExtintos = $totalAnuidadeExtintos->sum('valor_originario');
+
+        $totalMultaExtintos = $multa::select('valor_atualizado')->where('extinto',1)->get();
         $totalRecebidoMultaExtintos = $totalMultaExtintos->sum('valor_atualizado');
 
         return view('site.home',[
@@ -30,9 +34,7 @@ class dividaController extends Controller
         ]);
     }
     public function busca(Request $request){
-        $opcao = $request->select;
-     
-       
+        $opcao = $request->select;       
         if($opcao == 'anuidade'){
                 $mensagem = "Resultados encontrados por: '$request->busca'";
                 $usuarioAnuidade = new Anuidade;
@@ -40,6 +42,7 @@ class dividaController extends Controller
                 return view('site.filtro',[
                     'resultado' => $result,
                     'mensagem' =>$mensagem,
+                    'opcao' =>$opcao,
                     
                 ]);
             
@@ -50,8 +53,10 @@ class dividaController extends Controller
                 return view('site.filtro',[
                     'resultado' => $result,
                     'mensagem' =>$mensagem,
+                    'opcao' =>$opcao,
                     
                 ]);
+
         }elseif($opcao == 'Selecione'){
             session()->flash('msg', 'Escolha uma opção.');
             return redirect()->back();
@@ -60,9 +65,10 @@ class dividaController extends Controller
 
     }
     public function edit(Anuidade $user){
-            return view('site.editarRegistro',[
+            /*return view('site.editarRegistro',[
                 'user'=>$user
-            ]);
+            ]);*/
+            dd($user);
 
     }
     public function editar(Anuidade $user, Request $request){
@@ -89,7 +95,7 @@ class dividaController extends Controller
                 $ano = $request->inicial;
                 $situacao = $request->situacao;
                 $lista = new Multa;
-                $result = $lista::Raw('SELECT * FROM tb_multa')->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+                $result = $lista::Raw('SELECT * FROM tbmulta')->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
                 return view('site.pdf',[
                     'lista' =>$result,
                     'mensagem' =>'$mensagem'
@@ -117,7 +123,7 @@ class dividaController extends Controller
                 $mes = $array1[0];
                 $ano = $array1[1];
                 $lista = new Multa;
-                $result = $lista::Raw('SELECT * FROM tb_multa')->whereMonth('data_debito',$mes)->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+                $result = $lista::Raw('SELECT * FROM tbmulta')->whereMonth('data_debito',$mes)->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
                 return view('site.pdf',[
                     'lista' =>$result,
                     'mensagem' =>'$mensagem'
@@ -139,7 +145,7 @@ class dividaController extends Controller
         }elseif($request->tipo == 'multa'){
                 $situacao = $request->situacao;
                 $lista = new Multa;
-                $result = $lista::Raw('SELECT * FROM tb_multa')->where('ativo',$situacao)->get();
+                $result = $lista::Raw('SELECT * FROM tbmulta')->where('ativo',$situacao)->get();
                 return view('site.pdf',[
                     'lista' =>$result,
                     'mensagem' =>'$mensagem'
