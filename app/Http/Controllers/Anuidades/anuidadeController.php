@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Anuidades;
 
 use App\Anuidade;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -27,7 +28,7 @@ class anuidadeController extends Controller
    
     public function store(AnuidadeRequest $request)
     {
-        $dat = str_replace('/','-',$request->data_debito);
+        /*$dat = str_replace('/','-',$request->data_debito);
         $data = date('Y-m-d', strtotime($dat));
         
         $user = new Anuidade;
@@ -55,7 +56,9 @@ class anuidadeController extends Controller
         $user->save();
         
         session()->flash('msg', 'Cadastrado com sucesso!.');
-        return redirect()->back();
+        return redirect()->back();*/
+       $cobranca = new Cobranca;
+
     }
 
 

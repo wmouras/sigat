@@ -23,6 +23,7 @@
     <label for="inputPassword3" class="col-sm-2 control-label">CPF/CNPF *</label>
     <div class="col-sm-6">
       <input type="text" class="form-control"  placeholder="DIGITE O CPF/CNPJ" name="cpf_cnpj" value="{{$user->cpf_cnpj}}">
+      <p>Obs:Digite sem pontos, traços ou barras. Ex: 1234567891011</p>
     </div>
   </div>
 
@@ -41,24 +42,26 @@
   </div>
 
   <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">ANUIDADE INICIAL *</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control"  placeholder="Exemplo: 2019" name="anuidade_inicial" value="{{$user->anuidade_inicial}}">
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">ANUIDADE FINAL *</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control"  placeholder="Exemplo: 2020" name="anuidade_final" value="{{$user->anuidade_final}}">
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">VALOR ORIGINÁRIO</label>
+    <label for="inputPassword3" class="col-sm-2 control-label">VALOR ORIGINÁRIO R$:</label>
     <div class="col-sm-6">
       <input type="text" class="form-control" placeholder="R$: 000.00" name="valor_originario" value="{{$user->valor_originario}}">
-      
+      <p>Obs: Digite no formatado decimal. Ex: 1500.50</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">SITUAÇÃO</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control"  name="situacao" value="{{$situacao}}">
+      <p>Obs: Digite no formatado decimal. Ex: 1500.50</p>
+    </div>
+  </div>
+
+  <div class="form-group" style="display:none">
+    <label for="inputPassword3" class="col-sm-2 control-label">opcao</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" name="opcao" value="multa">
+      <input type="text" class="form-control"  name="id" value="{{$user->id}}">
     </div>
   </div>
 

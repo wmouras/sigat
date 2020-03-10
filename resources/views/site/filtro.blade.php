@@ -5,6 +5,14 @@
   <div  class='alert alert-danger'><h4>{!! Session::has('msg') ? Session::get("msg") : '' !!}</h4></div>
 @endif
 
+@if(Session::has('sucess'))
+  <div  class='alert alert-success'><h4>{!! Session::has('sucess') ? Session::get("sucess") : '' !!}</h4></div>
+@endif
+
+@if(Session::has('falid'))
+  <div  class='alert alert-danger'><h4>{!! Session::has('falid') ? Session::get("falid") : '' !!}</h4></div>
+@endif
+
 <div class="form-group" style="margin-top:90px;">
             <form class="form-inline" action="{{route('buscarUsuario')}}" method="POST">
             @csrf
@@ -26,7 +34,7 @@
 </div>
 
 
-<table class="table table-hover">
+<table class="table table-hover table-dark">
   <tr>
       <td>Nome</td>
       <td>Processo</td>
@@ -50,9 +58,9 @@
             <td>R$: {{ number_format($user->valor_originario, 2, ',','.')}}</td>
             <td>R$: {{number_format($user->valor_atualizado, 2, ',','.')}}</td>
             @if ($user->ativo == 1)
-            <td>Em dívida ativa</td>
+            <td class="table-danger">Em dívida ativa</td>
             @else
-            <td>Extinto</td>
+            <td class="table-warning">Extinto</td>
             @endif
             <td>
             <form action = "{{route('editRegistro',['user'=>$user->id])}}" method="post">

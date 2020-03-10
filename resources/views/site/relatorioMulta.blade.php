@@ -65,7 +65,10 @@ div#optSelect{
     margin:5%;
 }
 </style>
-<h1 style="margin-left:32%;">Relátorios Anuidades</h1>
+<h1 style="margin-left:32%;">Relátorios Multa</h1>
+@if(Session::has('msg'))
+    <div  class='alert alert-danger'><h4>{!! Session::has('msg') ? Session::get("msg") : '' !!}</h4></div>
+@endif
 <div id="itens" class="container-fluid well">
 
 <!-- Card 1 -->  

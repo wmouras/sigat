@@ -39,6 +39,10 @@ class dividaController extends Controller
                 $mensagem = "Resultados encontrados por: '$request->busca'";
                 $usuarioAnuidade = new Anuidade;
                 $result = $usuarioAnuidade::where('nome','LIKE','%'.$request->busca.'%')->get();
+                if(isset($result) && $result->count() == 0){
+                    session()->flash('falid', 'Nenhum registro encontrado.');
+                    return redirect()->back();
+                }
                 return view('site.filtro',[
                     'resultado' => $result,
                     'mensagem' =>$mensagem,
@@ -50,6 +54,10 @@ class dividaController extends Controller
                 $usuarioMulta = new Multa;
                 $result = $usuarioMulta::where('nome','LIKE','%'.$request->busca.'%')->get();
                 $mensagem = 'Lista de Multas';
+                if(isset($result) && $result->count() == 0){
+                    session()->flash('falid', 'Nenhum registro encontrado.');
+                    return redirect()->back();
+                }
                 return view('site.filtro',[
                     'resultado' => $result,
                     'mensagem' =>$mensagem,
@@ -58,25 +66,98 @@ class dividaController extends Controller
                 ]);
 
         }elseif($opcao == 'Selecione'){
-            session()->flash('msg', 'Escolha uma opção.');
+            session()->flash('msg', 'Selecione uma opção.');
             return redirect()->back();
         }
       
 
     }
-    public function edit(Anuidade $user){
+    public function edit(Request $request){
             /*return view('site.editarRegistro',[
                 'user'=>$user
             ]);*/
-            dd($user);
+            if($request->opcao == 'anuidade'){
+                $anuidade = new Anuidade;
+                $user = $anuidade::where('id',$request->user)->first();
+                $situacao = 'Indisponível';
+                if($user->ativo == '1'){
+                    $situacao = 'Em divida Ativa';
+                }
+                elseif($user->extinto == '1'){
+                    $situacao = 'Extinto';
+                }
+                return view('site.editarRegistroAnuidade',[
+                    'user'=>$user,
+                    'situacao' =>$situacao
+                ]);
+            }elseif($request->opcao == 'multa'){
+                $multa = new Multa;
+                $user = $multa::where('id',$request->user)->first();
+                $situacao = 'Indisponível';
+                if($user->ativo == '1'){
+                    $situacao = 'Em divida Ativa';
+                }
+                elseif($user->extinto == '1'){
+                    $situacao = 'Extinto';
+                }
+                return view('site.editarRegistroMulta',[
+                    'user'=>$user
+                ]);
+            }
 
     }
-    public function editar(Anuidade $user, Request $request){
-            
-            $user->update($request->all());
-            session()->flash('msg', 'Atualizado com sucesso!.');
-            return redirect()->back();
-
+    public function editar(Request $request){
+            if($request->opcao == 'anuidade'){
+                $anuidade = new Anuidade;
+                $ativo = '1';
+                $extinto = '0';
+                if($request->select == '1'){
+                    $ativo = '1';
+                    $extinto = '0';
+                }
+                elseif($request->select == '0'){
+                    $ativo = '0';
+                    $extinto = '1';
+                }
+                $anuidade::where('id',$request->id)->update([
+                    'nome'=> $request->nome,
+                    'cpf_cnpj' =>$request->cpf_cnpj,
+                    'numero'=>$request->numero,
+                    'ef'=>$request->ef,
+                    'anuidade_inicial'=>$request->anuidade_inicial,
+                    'anuidade_final'=>$request->anuidade_final,
+                    'valor_originario'=>$request->valor_originario,
+                    'ativo' => $ativo,
+                    'extinto' => $extinto
+                ]);
+                session()->flash('sucess', 'Atualizado com sucesso!.');
+                return view('site.filtro');
+                
+            }elseif($request->opcao == 'multa'){
+                $multa = new Multa;
+                $ativo = '1';
+                $extinto = '0';
+                if($request->select == '1'){
+                    $ativo = '1';
+                    $extinto = '0';
+                }
+                elseif($request->select == '0'){
+                    $ativo = '0';
+                    $extinto = '1';
+                }
+                $multa::where('id',$request->id)->update([
+                    'nome'=> $request->nome,
+                    'cpf_cnpj' =>$request->cpf_cnpj,
+                    'numero'=>$request->numero,
+                    'ef'=>$request->ef,
+                    'valor_originario'=>$request->valor_originario,
+                    'ativo' =>$ativo,
+                    'extinto' =>$extinto
+                ]);
+                session()->flash('sucess', 'Atualizado com sucesso!.');
+                return view('site.filtro');
+            }
+           
     }
 
     public function gerarPdfAno(Request $request){
@@ -86,6 +167,10 @@ class dividaController extends Controller
                 $situacao = $request->situacao;
                 $lista = new Anuidade;
                 $result = $lista::Raw('SELECT * FROM tbanuidade')->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+                if(isset($result) && $result->count() == 0){
+                    session()->flash('msg', 'Nenhum Registro encontrado para o ano: '.$ano. ' na opção selecionada.');
+                    return redirect()->back();
+                }
                 return view('site.pdf',[
                     'lista' =>$result,
                     'mensagem' =>'$mensagem'
@@ -96,6 +181,10 @@ class dividaController extends Controller
                 $situacao = $request->situacao;
                 $lista = new Multa;
                 $result = $lista::Raw('SELECT * FROM tbmulta')->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+                if(isset($result) && $result->count() == 0){
+                    session()->flash('msg', 'Nenhum Registro encontrado para o ano: '.$ano.' na opção selecionada.');
+                    return redirect()->back();
+                }
                 return view('site.pdf',[
                     'lista' =>$result,
                     'mensagem' =>'$mensagem'
@@ -112,6 +201,11 @@ class dividaController extends Controller
                 $ano = $array1[1];
                 $lista = new Anuidade;
                 $result = $lista::Raw('SELECT * FROM tbanuidade')->whereMonth('data_debito',$mes)->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+                if(isset($result) && $result->count() == 0){
+                    session()->flash('msg', 'Nenhum Registro encontrado em '.$mes.'/'.$ano.' para a opção selecionada.');
+                    return redirect()->back();
+                }
+
                 return view('site.pdf',[
                     'lista' =>$result,
                     'mensagem' =>'$mensagem'
@@ -124,12 +218,17 @@ class dividaController extends Controller
                 $ano = $array1[1];
                 $lista = new Multa;
                 $result = $lista::Raw('SELECT * FROM tbmulta')->whereMonth('data_debito',$mes)->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+                if(isset($result) && $result->count() == 0){
+                    session()->flash('msg', 'Nenhum Registro encontrado em '.$mes.'/'.$ano.' para a opção selecionada.');
+                    return redirect()->back();
+                }
                 return view('site.pdf',[
                     'lista' =>$result,
                     'mensagem' =>'$mensagem'
                 ]);
-           
+            
         }
+        
             
     }
 
@@ -138,6 +237,10 @@ class dividaController extends Controller
                 $situacao = $request->situacao;
                 $lista = new Anuidade;
                 $result = $lista::Raw('SELECT * FROM tbanuidade')->where('ativo',$situacao)->get();
+                if(isset($result) && $result->count() == 0){
+                    session()->flash('msg', 'Ainda não possui registro pela opção selecionada.');
+                    return redirect()->back();
+                }
                 return view('site.pdf',[
                     'lista' =>$result,
                     'mensagem' =>'$mensagem'
@@ -146,12 +249,15 @@ class dividaController extends Controller
                 $situacao = $request->situacao;
                 $lista = new Multa;
                 $result = $lista::Raw('SELECT * FROM tbmulta')->where('ativo',$situacao)->get();
+                if(isset($result) && $result->count() == 0){
+                    session()->flash('msg', 'Ainda não possui registro pela opção selecionada.');
+                    return redirect()->back();
+                }
                 return view('site.pdf',[
                     'lista' =>$result,
                     'mensagem' =>'$mensagem'
                 ]);
         }
-            
-            
+           
     }
 }

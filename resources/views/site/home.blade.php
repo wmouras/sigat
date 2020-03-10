@@ -46,6 +46,7 @@ img#img-acessoRapido{
                 <div class="panel panel-success">
                     <div style="text-align: center;" class="panel-heading"><h4>TOTAL DE MULTAS-EXTINTOS</h4></div>
                     <div style="text-align: center;" class="panel-body"><h2>R$: {{number_format($totalMultaExinto, 2, ',','.')}}</h2></div>
+                   
                 </div>
             </div>
         </div>
