@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Multa;
 use App\Anuidade;
 use App\Http\Requests\AnuidadeRequest;
+use PDF;
+use Barryvdh\Snappy;
 class dividaController extends Controller
 {
     public function index(){
@@ -171,10 +173,14 @@ class dividaController extends Controller
                     session()->flash('msg', 'Nenhum Registro encontrado para o ano: '.$ano. ' na opção selecionada.');
                     return redirect()->back();
                 }
-                return view('site.pdf',[
+                return \PDF::loadView('site.pdf',
+                 ['lista'=>$result,
+                    'situacao' =>$situacao
+                 ])->stream('listaAnuidades.pdf');
+                /*return view('site.pdf',[
                     'lista' =>$result,
                     'mensagem' =>'$mensagem'
-                ]);
+                ]);*/
            
         }elseif($request->tipo == 'multa'){
                 $ano = $request->inicial;
@@ -185,10 +191,15 @@ class dividaController extends Controller
                     session()->flash('msg', 'Nenhum Registro encontrado para o ano: '.$ano.' na opção selecionada.');
                     return redirect()->back();
                 }
-                return view('site.pdf',[
+
+                return \PDF::loadView('site.pdf',
+                 ['lista'=>$result,
+                    'situacao' =>$situacao
+                 ])->stream('listaAnuidades.pdf');
+                /*return view('site.pdf',[
                     'lista' =>$result,
                     'mensagem' =>'$mensagem'
-                ]);
+                ]);*/
         }
            
     }
@@ -206,10 +217,15 @@ class dividaController extends Controller
                     return redirect()->back();
                 }
 
-                return view('site.pdf',[
+                return \PDF::loadView('site.pdf',
+                 ['lista'=>$result,
+                    'situacao' =>$situacao
+                 ])->stream('listaAnuidades.pdf');
+
+                /*return view('site.pdf',[
                     'lista' =>$result,
                     'mensagem' =>'$mensagem'
-                ]);
+                ]);*/
             
         }elseif($request->tipo == 'multa'){
                 $situacao = $request->situacao;
@@ -222,10 +238,16 @@ class dividaController extends Controller
                     session()->flash('msg', 'Nenhum Registro encontrado em '.$mes.'/'.$ano.' para a opção selecionada.');
                     return redirect()->back();
                 }
+
+                return \PDF::loadView('site.pdf',
+                 ['lista'=>$result,
+                    'situacao' =>$situacao
+                 ])->stream('listaAnuidades.pdf');
+                /*
                 return view('site.pdf',[
                     'lista' =>$result,
                     'mensagem' =>'$mensagem'
-                ]);
+                ]);*/
             
         }
         
@@ -241,10 +263,14 @@ class dividaController extends Controller
                     session()->flash('msg', 'Ainda não possui registro pela opção selecionada.');
                     return redirect()->back();
                 }
-                return view('site.pdf',[
+                return \PDF::loadView('site.pdf',
+                 ['lista'=>$result,
+                    'situacao' =>$situacao
+                 ])->stream('listaAnuidades.pdf');
+                /*return view('site.pdf',[
                     'lista' =>$result,
                     'mensagem' =>'$mensagem'
-                ]);
+                ]);*/
         }elseif($request->tipo == 'multa'){
                 $situacao = $request->situacao;
                 $lista = new Multa;
@@ -253,10 +279,14 @@ class dividaController extends Controller
                     session()->flash('msg', 'Ainda não possui registro pela opção selecionada.');
                     return redirect()->back();
                 }
-                return view('site.pdf',[
+                return \PDF::loadView('site.pdf',
+                 ['lista'=>$result,
+                    'situacao' =>$situacao
+                 ])->stream('listaAnuidades.pdf');
+                /*return view('site.pdf',[
                     'lista' =>$result,
                     'mensagem' =>'$mensagem'
-                ]);
+                ]);*/
         }
            
     }

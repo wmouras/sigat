@@ -13,6 +13,14 @@
   </div>
 @endif
 
+@if(Session::has('msg'))
+  <div  class='alert alert-danger'><h3>{!! Session::has('msg') ? Session::get("msg") : '' !!}</h3></div>
+@endif
+
+@if(Session::has('sucess'))
+  <div  class='alert alert-success'><h3>{!! Session::has('sucess') ? Session::get("sucess") : '' !!}</h3></div>
+@endif
+
 <div class="container well ">
     <h2 style="margin-left:25%; margin-top:15px;margin-buttom:15px; ">CADASTRAR MULTA-EXTINTO <MULTA-EXTINTO></MULTA-EXTINTO></h2>
 <form action="{{route('formCadMulta')}}" class="form-horizontal" method="POST">
@@ -57,14 +65,6 @@
     <label for="inputPassword3" class="col-sm-2 control-label">VALOR ORIGINÁRIO</label>
     <div class="col-sm-6">
       <input type="text" name="valorOriginario" class="form-control" id="inputValorValorOriginario" placeholder="R$: 000.00" value="{{old('valorOriginario')}}">
-      <p>Obs: Digite no formatado decimal. Ex: 1500.50</p>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">VALOR ATUALIZADO</label>
-    <div class="col-sm-6">
-      <input type="text" name="valorAtualizado" class="form-control" id="inputValorAtualizado" placeholder="R$: 000.00" value="{{old('valorAtualizado')}}">
       <p>Obs: Digite no formatado decimal. Ex: 1500.50</p>
     </div>
   </div>

@@ -30,7 +30,7 @@ class MultaRequest extends FormRequest
                 'data_debito' =>'required',
                 'ef' =>'required',
                 'valorOriginario'=>'required|numeric',
-                'valorAtualizado'=>'required|numeric'
+                
         ];
     }
     public function messages(){
@@ -42,9 +42,8 @@ class MultaRequest extends FormRequest
             "data_debito.required"=>"O Campo 'Data do débito' é obrigatório",
             "ef.required"=>"O Campo 'Ef' é obrigatório",
             "valorOriginario.required"=>"O Campo 'Valor originário' é obrigatório",
-            "valorAtualizado.required"=>"O Campo 'Valor atualizado' é obrigatório",
             "valorOriginario.numeric"=>"O campo 'Valor originario' tem que ser numérico",
-            "valorAtualizado.numeric"=>"O campo 'Valor atualizado' tem que ser numérico"
+           
         ];
     }
 }

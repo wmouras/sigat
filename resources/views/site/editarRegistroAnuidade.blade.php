@@ -73,11 +73,19 @@
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">SITUAÇÃO ATUAL:</label>
     <div class="col-sm-6">
-    <select name="select" class="custom-select is-invalid" id="inlineFormCustomSelect">
+    <select name="selectAnuidade" class="custom-select is-invalid" id="selectAnuidade">
         <option selected>SELECIONE</option>
         <option value="1">EM DÍVIDA ATIVA</option>
         <option value="0">EXTINTO</option>
       </select>
+    </div>
+  </div>
+
+  <div class="form-group" style="display:none" id="inputValorRecebido">
+    <label for="inputPassword3" class="col-sm-2 control-label">VALOR RECEBIDO R$:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" placeholder="R$: 000.00" name="valor_recebido" value="{{$user->valor_atualizado}}">
+      <p>Obs: Digite no formatado decimal. Ex: 1500.50</p>
     </div>
   </div>
 
@@ -97,5 +105,18 @@
   </div>
 </form>
 </div>
+
+<script>
+$(document).on('click', '#selectAnuidade', function(){
+  var tipoCade = $('#selectAnuidade').val();
+  if(tipoCade == '1'){
+    $('#inputValorRecebido').css('display','none')
+  }else if(tipoCade == '0'){
+    $('#inputValorRecebido').css('display','block')
+  }
+});
+</script>
+
+
 
 @endsection

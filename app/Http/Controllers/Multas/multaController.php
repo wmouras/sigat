@@ -39,6 +39,33 @@ class multaController extends Controller
     {
         $dat = str_replace('/','-',$request->data_debito);
         $data = date('Y-m-d', strtotime($dat));
+        $ano = date('Y',strtotime($data));
+        $mes = date('m',strtotime($data));
+        $mesAnterior = $mes - 1;
+        /// Datas atuais
+        $anoAtual = date('Y');
+        $mesAt = date('m');
+        $mesAtual = $mesAt - 1;
+
+        $indAtual = \DB::connection('mysql3')->table('inpc')->select('numero_indice')->where('mes',$mesAtual)->where('ano', $anoAtual)->get();
+        $indAt = $indAtual[0];
+        $indiceAtual = $indAt->numero_indice;
+
+        $indAnt = \DB::connection('mysql3')->table('inpc')->select('numero_indice')->where('mes',$mesAnterior)->where('ano', $ano)->get();
+        $indAnte = $indAnt[0];
+        $indiceAnterior = $indAnte->numero_indice;
+
+        //Meses em atrasso
+        $a1 = ($anoAtual - $ano) * 12;
+        $m1 = ($mesAtual - $mesAnterior) * -1;
+        $mesesAtraso = ($m1 + $a1);
+
+        $total = total($indiceAtual, $indiceAnterior, $request->valorOriginario, $mesesAtraso);
+        $jurosMulta = juros($indiceAtual, $indiceAnterior, $request->valorOriginario, $mesesAtraso);
+        $correcaoMonetaria = correcaoMonetaria($indiceAtual, $indiceAnterior, $request->valorOriginario);
+
+
+        //dd($indiceAtual, $indiceAnterior, $a1, $m1,$mesesAtraso, $total, $jurosMulta, $correcaoMonetaria);
 
         $user = new Multa;
         $user->nome = $request->nome;
@@ -47,9 +74,9 @@ class multaController extends Controller
         $user->cpf_cnpj = $request->cpf_cnpj;
         $user->data_debito = $data;
         $user->valor_originario = $request->valorOriginario;
-        $user->juros = 0.00;
-        $user->correcaoMonetaria = 0.00;
-        $user->valor_atualizado = $request->valorAtualizado;
+        $user->juros = $jurosMulta;
+        $user->correcaoMonetaria = $correcaoMonetaria;
+        $user->valor_atualizado = $total;
  
 
         if($request->situacao == 1){
@@ -63,6 +90,7 @@ class multaController extends Controller
         }
         $user->save();
         return redirect()->route('home');
+
     }
 
   

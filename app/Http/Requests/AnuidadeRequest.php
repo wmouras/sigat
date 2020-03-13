@@ -32,7 +32,6 @@ class AnuidadeRequest extends FormRequest
                 'anuidadeInicial'=>'required|numeric',
                 'anuidadeFinal'=>'required|numeric',
                 'valorOriginario'=>'required|numeric',
-                'valorAtualizado'=>'required|numeric'
         ];
     }
     public function messages(){
@@ -50,7 +49,6 @@ class AnuidadeRequest extends FormRequest
             "anuidadeInicial.numeric"=>"O campo 'Anuidade Inicial' tem que ser numérico",
             "anuidadeFinal.numeric"=>"O campo 'Anuidade Final' tem que ser numérico",
             "valorOriginario.numeric"=>"O campo 'Valor originario' tem que ser numérico",
-            "valorAtualizado.numeric"=>"O campo 'Valor atualizado' tem que ser numérico"
         ];
     }
 }

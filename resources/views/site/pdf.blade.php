@@ -1,8 +1,7 @@
-@extends('site.layout')
-@section('conteudo')
+
 
 <div class="form-group">
-<button id="btn">Download</button>
+<h3>Lista de {{$situacao}}</h3>
 </div>
 <table id='tabela' class="table table-bordered">
     <tr>
@@ -11,7 +10,7 @@
         <td>EF</td>
         <td>Data do Débito</td>
         <td>Valor Originário</td>
-        <td>Valor Atualizado</td>
+        <td>Total</td>
         
     </tr>
     
@@ -33,12 +32,3 @@
    
 </table>
 
-
-
-<script type="text/javascript">
-$('#btn').click(function(){
-    $('#tabela').printThis();
-})
-   
-</script>
-@endsection

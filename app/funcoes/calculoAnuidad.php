@@ -12,6 +12,7 @@
         $Novafaixa = "M"
     }
 
+	
     $mes = '2';
     // pega anuidades inicial e final
     $anuidadeInicial, anuidadeFinal;
