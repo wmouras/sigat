@@ -169,37 +169,50 @@ class dividaController extends Controller
                 $situacao = $request->situacao;
                 $lista = new Anuidade;
                 $result = $lista::Raw('SELECT * FROM tbanuidade')->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+
+                $somaTotal = $lista::select('valor_originario')->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+                $total = $somaTotal->sum('valor_originario');
+             
                 if(isset($result) && $result->count() == 0){
                     session()->flash('msg', 'Nenhum Registro encontrado para o ano: '.$ano. ' na opção selecionada.');
                     return redirect()->back();
                 }
-                return \PDF::loadView('site.pdf',
+                /*return \PDF::loadView('site.pdf',
                  ['lista'=>$result,
                     'situacao' =>$situacao
-                 ])->stream('listaAnuidades.pdf');
-                /*return view('site.pdf',[
+                 ])->stream('listaAnuidades.pdf');*/
+                
+                
+                return view('site.pdf',[
                     'lista' =>$result,
-                    'mensagem' =>'$mensagem'
-                ]);*/
+                    'mensagem' =>'$mensagem',
+                    'situacao' =>$situacao,
+                    'total' =>$total
+                ]);
            
         }elseif($request->tipo == 'multa'){
                 $ano = $request->inicial;
                 $situacao = $request->situacao;
                 $lista = new Multa;
                 $result = $lista::Raw('SELECT * FROM tbmulta')->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+
+                $somaTotal = $lista::select('valor_originario')->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+                $total = $somaTotal->sum('valor_originario');
                 if(isset($result) && $result->count() == 0){
                     session()->flash('msg', 'Nenhum Registro encontrado para o ano: '.$ano.' na opção selecionada.');
                     return redirect()->back();
                 }
 
-                return \PDF::loadView('site.pdf',
+                /*return \PDF::loadView('site.pdf',
                  ['lista'=>$result,
                     'situacao' =>$situacao
-                 ])->stream('listaAnuidades.pdf');
-                /*return view('site.pdf',[
+                 ])->stream('listaAnuidades.pdf');*/
+                return view('site.pdf',[
                     'lista' =>$result,
-                    'mensagem' =>'$mensagem'
-                ]);*/
+                    'mensagem' =>'$mensagem',
+                    'situacao' =>$situacao,
+                    'total' =>$total
+                ]);
         }
            
     }
@@ -212,20 +225,26 @@ class dividaController extends Controller
                 $ano = $array1[1];
                 $lista = new Anuidade;
                 $result = $lista::Raw('SELECT * FROM tbanuidade')->whereMonth('data_debito',$mes)->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+
+                
+                $somaTotal = $lista::select('valor_originario')->whereMonth('data_debito',$mes)->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+                $total = $somaTotal->sum('valor_originario');
                 if(isset($result) && $result->count() == 0){
                     session()->flash('msg', 'Nenhum Registro encontrado em '.$mes.'/'.$ano.' para a opção selecionada.');
                     return redirect()->back();
                 }
 
-                return \PDF::loadView('site.pdf',
+                /*return \PDF::loadView('site.pdf',
                  ['lista'=>$result,
                     'situacao' =>$situacao
-                 ])->stream('listaAnuidades.pdf');
+                 ])->stream('listaAnuidades.pdf');*/
 
-                /*return view('site.pdf',[
+                return view('site.pdf',[
                     'lista' =>$result,
-                    'mensagem' =>'$mensagem'
-                ]);*/
+                    'mensagem' =>'$mensagem',
+                    'situacao' =>$situacao,
+                    'total' =>$total
+                ]);
             
         }elseif($request->tipo == 'multa'){
                 $situacao = $request->situacao;
@@ -234,20 +253,25 @@ class dividaController extends Controller
                 $ano = $array1[1];
                 $lista = new Multa;
                 $result = $lista::Raw('SELECT * FROM tbmulta')->whereMonth('data_debito',$mes)->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+
+                $somaTotal = $lista::select('valor_originario')->whereMonth('data_debito',$mes)->whereYear('data_debito',$ano)->where('ativo',$situacao)->get();
+                $total = $somaTotal->sum('valor_originario');
                 if(isset($result) && $result->count() == 0){
                     session()->flash('msg', 'Nenhum Registro encontrado em '.$mes.'/'.$ano.' para a opção selecionada.');
                     return redirect()->back();
                 }
 
-                return \PDF::loadView('site.pdf',
+                /*return \PDF::loadView('site.pdf',
                  ['lista'=>$result,
                     'situacao' =>$situacao
-                 ])->stream('listaAnuidades.pdf');
-                /*
+                 ])->stream('listaAnuidades.pdf');*/
+                
                 return view('site.pdf',[
                     'lista' =>$result,
-                    'mensagem' =>'$mensagem'
-                ]);*/
+                    'mensagem' =>'$mensagem',
+                    'situacao' =>$situacao,
+                    'total' =>$total
+                ]);
             
         }
         
@@ -259,34 +283,44 @@ class dividaController extends Controller
                 $situacao = $request->situacao;
                 $lista = new Anuidade;
                 $result = $lista::Raw('SELECT * FROM tbanuidade')->where('ativo',$situacao)->get();
+
+                $somaTotal = $lista::select('valor_originario')->where('ativo',$situacao)->get();
+                $total = $somaTotal->sum('valor_originario');
                 if(isset($result) && $result->count() == 0){
                     session()->flash('msg', 'Ainda não possui registro pela opção selecionada.');
                     return redirect()->back();
                 }
-                return \PDF::loadView('site.pdf',
+                /*return \PDF::loadView('site.pdf',
                  ['lista'=>$result,
                     'situacao' =>$situacao
-                 ])->stream('listaAnuidades.pdf');
-                /*return view('site.pdf',[
+                 ])->stream('listaAnuidades.pdf');*/
+                return view('site.pdf',[
                     'lista' =>$result,
-                    'mensagem' =>'$mensagem'
-                ]);*/
+                    'mensagem' =>'$mensagem',
+                    'situacao' =>$situacao,
+                    'total' =>$total
+                ]);
         }elseif($request->tipo == 'multa'){
                 $situacao = $request->situacao;
                 $lista = new Multa;
                 $result = $lista::Raw('SELECT * FROM tbmulta')->where('ativo',$situacao)->get();
+
+                $somaTotal = $lista::select('valor_originario')->where('ativo',$situacao)->get();
+                $total = $somaTotal->sum('valor_originario');
                 if(isset($result) && $result->count() == 0){
                     session()->flash('msg', 'Ainda não possui registro pela opção selecionada.');
                     return redirect()->back();
                 }
-                return \PDF::loadView('site.pdf',
+                /*return \PDF::loadView('site.pdf',
                  ['lista'=>$result,
                     'situacao' =>$situacao
-                 ])->stream('listaAnuidades.pdf');
-                /*return view('site.pdf',[
+                 ])->stream('listaAnuidades.pdf');*/
+                return view('site.pdf',[
                     'lista' =>$result,
-                    'mensagem' =>'$mensagem'
-                ]);*/
+                    'mensagem' =>'$mensagem',
+                    'situacao' =>$situacao,
+                    'total' =>$total
+                ]);
         }
            
     }
