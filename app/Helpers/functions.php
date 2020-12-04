@@ -3,7 +3,7 @@
  function calculaTotalAnuidades($anuidade,$anuidade_inicial, $anuidade_final){
     $totalAnuidade = contarAnuidades($anuidade_inicial, $anuidade_final);
     $valorTotalAnuidade = $anuidade * $totalAnuidade;
-    return $valorTotalAnuidade; // valor total de anuidades pendentes. 
+    return $valorTotalAnuidade; // valor total de anuidades pendentes.
 }
 
  function calculaTotalMultas($anuidade, $porcentagem, $anuidade_inicial, $anuidade_final){
@@ -32,11 +32,15 @@
 
 }
 
- function contarAnuidades($Anuidade_inicial, $Anuidade_final){
+function contaMes(){
+
+}
+
+function contarAnuidades($Anuidade_inicial, $Anuidade_final){
         $totalAnuidade = '0';
         while($Anuidade_inicial <= $Anuidade_final){
             $totalAnuidade = $totalAnuidade + 1;
-            $Anuidade_inicial = $Anuidade_inicial + 1;  
+            $Anuidade_inicial = $Anuidade_inicial + 1;
         }
         return $totalAnuidade;
 
@@ -46,7 +50,7 @@
     $variacao = $valorAnuidade * $inpc;
     $variacaoAnuidade = $valorAnuidade + $variacao;
     $variacaoAnuidade = number_format($variacaoAnuidade,2,",",".");
-    return $variacaoAnuidade;     
+    return $variacaoAnuidade;
 }
 
 
@@ -86,10 +90,19 @@
         $juros = $valorOriginal * $indiceCorrecao * 0.01 *  $mesesAtraso;
         return $juros; // valor total de multas.
 }
-    
+
  function total($indiceAtual, $indiceAnterior, $valorOriginal, $mesesAtraso){
         $juros = juros($indiceAtual, $indiceAnterior, $valorOriginal, $mesesAtraso);
         $correcaoMonetaria = correcaoMonetaria($indiceAtual, $indiceAnterior, $valorOriginal);
         $total = $valorOriginal + $juros + $correcaoMonetaria;
-        return $total; 
+        return $total;
+}
+
+function alteraValorBd( $valor ){
+    $vl = str_replace('.', '', $valor);
+    return str_replace(',', '.', $vl);
+}
+
+function apenasNumero( $valor ){
+    return preg_replace('/[^0-9]/', '', $valor);
 }

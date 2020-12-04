@@ -55,20 +55,18 @@
             <td>{{$user->numero}}</td>
             <td>{{$user->ef}}</td>
             <td>{{date('d/m/Y',strtotime($user->data_debito))}}</td>
-            <td>R$: {{ number_format($user->valor_originario, 2, ',','.')}}</td>
+            <td>R$: {{number_format($user->valor_originario, 2, ',','.')}}</td>
             <td>R$: {{number_format($user->valor_atualizado, 2, ',','.')}}</td>
             @if ($user->ativo == 1)
             <td class="table-danger">Em dívida ativa</td>
             @else
             <td class="table-warning">Extinto</td>
             @endif
+            <td>            
+                <a href="{{route('editRegistro',['user'=>$user->id, 'opcao' => 'anuidade', 'id'=>$user->id])}}" class="btn btn-primary" >Editar</a>            
+            </td>
             <td>
-            <form action = "{{route('editRegistro',['user'=>$user->id])}}" method="post">
-            @csrf
-                <input style="display:none" type="text" name = 'opcao' value="{{$opcao}}">
-                <input style="display:none" type="text" name = 'user' value="{{$user->id}}">
-                <a href=""><button type="submit" class="btn btn-primary" >Editar</button>
-            </form>
+                <a href="{{route('excluirRegistro',['user'=>$user->id, 'opcao' => 'anuidade', 'id'=>$user->id])}}" class="btn btn-danger" >Excluir</a>
             </td>
         </tr>
     @endforeach

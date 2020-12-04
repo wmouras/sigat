@@ -42,16 +42,28 @@ class multaController extends Controller
         $ano = date('Y',strtotime($data));
         $mes = date('m',strtotime($data));
         $mesAnterior = $mes - 1;
+        $anoAnterior = $ano;
         /// Datas atuais
         $anoAtual = date('Y');
         $mesAt = date('m');
         $mesAtual = $mesAt - 1;
 
+        if($mesAnterior == 0){
+            $mesAnterior = 12;
+            $anoAnterior -= 1;
+        }
+
+        if($mesAnterior == 0){
+            $mesAtual = 12;
+            $anoAtual -= 1;
+        }
+
         $indAtual = \DB::connection('mysql3')->table('inpc')->select('numero_indice')->where('mes',$mesAtual)->where('ano', $anoAtual)->get();
+        
         $indAt = $indAtual[0];
         $indiceAtual = $indAt->numero_indice;
 
-        $indAnt = \DB::connection('mysql3')->table('inpc')->select('numero_indice')->where('mes',$mesAnterior)->where('ano', $ano)->get();
+        $indAnt = \DB::connection('mysql3')->table('inpc')->select('numero_indice')->where('mes',$mesAnterior)->where('ano', $anoAnterior)->get();
         $indAnte = $indAnt[0];
         $indiceAnterior = $indAnte->numero_indice;
 
@@ -59,6 +71,9 @@ class multaController extends Controller
         $a1 = ($anoAtual - $ano) * 12;
         $m1 = ($mesAtual - $mesAnterior) * -1;
         $mesesAtraso = ($m1 + $a1);
+
+        $valorOriginario = str_replace('.', '', $request->valorOriginario);
+        $request->valorOriginario = str_replace(',', '.', $valorOriginario);
 
         $total = total($indiceAtual, $indiceAnterior, $request->valorOriginario, $mesesAtraso);
         $jurosMulta = juros($indiceAtual, $indiceAnterior, $request->valorOriginario, $mesesAtraso);
@@ -70,9 +85,9 @@ class multaController extends Controller
         $user = new Multa;
         $user->nome = $request->nome;
         $user->numero = $request->processo;
-        $user->ef=$request->ef;
-        $user->cpf_cnpj = $request->cpf_cnpj;
-        $user->data_debito = $data;
+        $user->ef= ltrim( $request->ef, '0');
+        $user->cpf_cnpj = preg_replace('/[^0-9]/', '', $request->cpf_cnpj);
+        $user->data_debito = $data;        
         $user->valor_originario = $request->valorOriginario;
         $user->juros = $jurosMulta;
         $user->correcaoMonetaria = $correcaoMonetaria;
@@ -88,8 +103,14 @@ class multaController extends Controller
             $user->extinto = 1;
            
         }
-        $user->save();
-        return redirect()->route('home');
+        
+        try{
+            $user->save();
+            return redirect('home');
+        }catch(Excepion $e){
+            echo 'Exceção: ',  $e->getMessage(), "\n";
+        }
+        
 
     }
 

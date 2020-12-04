@@ -11,24 +11,35 @@
 </div>
 
 
+
+
         <table id='tabela' class="table table-bordered">
             <tr>
                 <td>Nome:</td>
                 <td>Nº Processo</td>
                 <td>Data do Débito</td>
                 <td>Valor Originário</td>
-                <td>Total</td>
+                <td>Anuidade Inicial</td>
+                <td>Anuidade Final</td>
+                <td>Total de Multas</td>
+                <td>Total de Juros</td>
+                <td>Valor Atualizado</td>
             </tr>
             
             <!--<div class="alert alert-danger" role="alert">Teste</div>-->
             
                 @foreach ($lista as $user)
+               
                 <tr>
-                    <td>{{$user->nome}}</td>
-                    <td>{{$user->numero}}</td>
-                    <td>{{date('d/m/Y',strtotime($user->data_debito))}}</td>
-                    <td>R$: {{ number_format($user->valor_originario, 2, ',','.')}}</td>
-                    <td>R$: {{number_format($user->valor_atualizado, 2, ',','.')}}</td>
+                    <td>{{$user["nome"]}}</td>
+                    <td>{{$user["ef"]}}</td>
+                    <td>{{date('d/m/Y',strtotime($user["dataDebito"]))}}</td>
+                    <td>R$: {{ number_format($user["valorOriginal"], 2, ',','.')}}</td>
+                    <td>{{$user["anuidadeInicial"]}}</td>
+                    <td>{{$user["anuidadeFinal"]}}</td>
+                    <td>R$: {{$user["totalMultas"]}}</td>
+                    <td>R$: {{$user["totalJuros"]}}</td>
+                    <td>R$: {{$user["valorAtualizado"]}}</td>
                 </tr>
                 @endforeach
 

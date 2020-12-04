@@ -22,8 +22,7 @@
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">CPF/CNPF *</label>
     <div class="col-sm-6">
-      <input type="text" class="form-control"  placeholder="DIGITE O CPF/CNPJ" name="cpf_cnpj" value="{{$user->cpf_cnpj}}">
-      <p>Obs:Digite sem pontos, traços ou barras. Ex: 1234567891011</p>
+      <input type="text" class="form-control"  placeholder="DIGITE O CPF/CNPJ" name="cpf_cnpj" value="{{$user->cpf_cnpj}}">      
     </div>
   </div>
 
@@ -58,8 +57,7 @@
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">VALOR ORIGINÁRIO R$:</label>
     <div class="col-sm-6">
-      <input type="text" class="form-control" placeholder="R$: 000.00" name="valor_originario" value="{{$user->valor_originario}}">
-      <p>Obs: Digite no formatado decimal. Ex: 1500.50</p>
+      <input type="text" class="form-control" placeholder="R$: 000.00" name="valor_originario" id="valor_originario" value="{{str_replace('.', '', $user->valor_originario)}}" >      
     </div>
   </div>
 
@@ -73,7 +71,7 @@
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">SITUAÇÃO ATUAL:</label>
     <div class="col-sm-6">
-    <select name="selectAnuidade" class="custom-select is-invalid" id="selectAnuidade">
+    <select name="select" class="custom-select is-invalid" id="selectAnuidade">
         <option selected>SELECIONE</option>
         <option value="1">EM DÍVIDA ATIVA</option>
         <option value="0">EXTINTO</option>
@@ -107,14 +105,22 @@
 </div>
 
 <script>
-$(document).on('click', '#selectAnuidade', function(){
-  var tipoCade = $('#selectAnuidade').val();
-  if(tipoCade == '1'){
-    $('#inputValorRecebido').css('display','none')
-  }else if(tipoCade == '0'){
-    $('#inputValorRecebido').css('display','block')
-  }
+
+$(document).ready(function(){
+
+  $('#valor_originario').mask("#.##0,00", {reverse: true});
+
+  $(document).on('click', '#selectAnuidade', function(){
+      var tipoCade = $('#selectAnuidade').val();
+      if(tipoCade == '1'){
+        $('#inputValorRecebido').css('display','none')
+      }else if(tipoCade == '0'){
+        $('#inputValorRecebido').css('display','block')
+      }
+  });
+
 });
+
 </script>
 
 

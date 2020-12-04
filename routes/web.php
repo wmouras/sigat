@@ -28,9 +28,11 @@ Route::get('/relatorioMulta', function(){
     return view('site.relatorioMulta');
 })->name('rMulta');
 
-Route::post('/edit/{user}', 'DividaAtiva\\dividaController@edit')->name('editRegistro');
+Route::get('/edit/{user}', 'DividaAtiva\\dividaController@edit')->name('editRegistro');
 
 Route::put('/editar/{user}', 'DividaAtiva\\dividaController@editar')->name('editarRegistro');
+
+Route::get('/excluir/{user}', 'DividaAtiva\\dividaController@delete')->name('excluirRegistro');
 
 Route::post('/formCadAnuidade','Anuidades\\anuidadeController@store')->name('formCadAnuidade');
 
@@ -44,7 +46,9 @@ Route::post('/pdfMes','DividaAtiva\\dividaController@gerarPdfMes' )->name('pdfMe
 
 Route::post('/pdfTodos','DividaAtiva\\dividaController@gerarPdfTodos' )->name('pdfTodos');
 
-Route::get('/divida-ativa','DividaAtiva\\dividaController@index')->name('home');
+Route::get('/','DividaAtiva\\dividaController@login')->name('login');
+Route::post('/home','DividaAtiva\\dividaController@index')->name('home');
+Route::get('/home','DividaAtiva\\dividaController@index')->name('home');
 
 
 

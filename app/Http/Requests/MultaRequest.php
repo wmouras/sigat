@@ -25,24 +25,22 @@ class MultaRequest extends FormRequest
     {
         return [
                 'nome' => 'required',
-                'cpf_cnpj'=>'required|numeric',
+                'cpf_cnpj'=>'required',
                 'processo'=>'required',
                 'data_debito' =>'required',
                 'ef' =>'required',
-                'valorOriginario'=>'required|numeric',
+                'valorOriginario'=>'required',
                 
         ];
     }
     public function messages(){
         return [
             "nome.required"=>"O Campo 'Nome' é obrigatório",
-            "cpf_cnpj.required"=>"O Campo 'Cpf/Cnpj' é obrigatório",
-            "cpf_cnpj.numeric"=>"Digite o Campo cpf/cnpj sem pontos, traços ou barra Ex: Ex1234567891011",
+            "cpf_cnpj.required"=>"O Campo 'Cpf/Cnpj' é obrigatório",            
             "processo.required"=>"O Campo 'Processo' é obrigatório",
             "data_debito.required"=>"O Campo 'Data do débito' é obrigatório",
             "ef.required"=>"O Campo 'Ef' é obrigatório",
-            "valorOriginario.required"=>"O Campo 'Valor originário' é obrigatório",
-            "valorOriginario.numeric"=>"O campo 'Valor originario' tem que ser numérico",
+            "valorOriginario.required"=>"O Campo 'Valor originário' é obrigatório",            
            
         ];
     }

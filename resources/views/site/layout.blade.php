@@ -1,7 +1,12 @@
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="{{asset('js/jquery.mask.min.js')}}"></script>
 
 <!------ Include the above in your HEAD tag ---------->
 
@@ -179,7 +184,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="{{route('home')}}">
-                <img style="width: 140px; height: 50px; border-radius: 10px;" src="imagens/CREA-DF.jpg" alt="LOGO">
+                <img style="width: 140px; height: 50px; border-radius: 10px;" src="http://www.creadf.org.br/images/logo.jpg" alt="LOGO">
             </a>
             </div>
             <div style="margin-left:600px;">
@@ -248,10 +253,11 @@
     <!-- /#page-wrapper -->
 </div><!-- /#wrapper -->
 
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="js/printThis/printThis.js" type="text/javascritp"></script>
+<script src="{{asset('js/jquery.mask.min.js')}}"></script>
 
 <script>
     $(function(){
