@@ -32,10 +32,6 @@
 
 }
 
-function contaMes(){
-
-}
-
 function contarAnuidades($Anuidade_inicial, $Anuidade_final){
         $totalAnuidade = '0';
         while($Anuidade_inicial <= $Anuidade_final){
