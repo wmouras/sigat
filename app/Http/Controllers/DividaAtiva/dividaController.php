@@ -491,7 +491,7 @@ class dividaController extends Controller
         }elseif($request->tipo == 'multa'){
                 $situacao = $request->situacao;
                 $lista = new Multa;
-                $result = $lista::Raw('SELECT * FROM tbmulta')->where('ativo',$situacao)->get();
+                $result = Multa::select(['id', 'nome', 'ef', 'cpf_cnpj', 'data_debito as dataDebito', 'valor_originario as valorOriginal', 'valor_atualizado as valorAtualizado', 'juros as TotalJuros', 'ativo', 'extinto'])->where('ativo',$situacao)->get();
 
                 $somaTotal = $lista::select('valor_originario')->where('ativo',$situacao)->get();
                 $total = $somaTotal->sum('valor_originario');
@@ -507,7 +507,8 @@ class dividaController extends Controller
                     'lista' =>$result,
                     'mensagem' =>'$mensagem',
                     'situacao' =>$situacao,
-                    'total' =>$total
+                    'total' =>$total,
+                    'tipo' => 'multa'
                 ]);
         }
 
