@@ -85,6 +85,8 @@ class dividaController extends Controller
             if($request->opcao == 'anuidade'){
                 $anuidade = new Anuidade;
 
+                // dd( $request );
+
                 $user = $anuidade::where('id',$request->id)->first();
 
                 $situacao = 'Indisponível';
@@ -135,10 +137,10 @@ class dividaController extends Controller
                     'ef'=>$request->ef,
                     'anuidade_inicial'=>$request->anuidade_inicial,
                     'anuidade_final'=>$request->anuidade_final,
-                    'valor_originario'=> alteraValorBd($request->valor_originario),
+                    'valor_originario'=>$request->valor_originario,
                     'ativo' => $ativo,
                     'extinto' => $extinto,
-                    'valor_atualizado' => alteraValorBd($request->valor_recebido)
+                    'valor_atualizado' => $request->valor_recebido
                 ]);
                 session()->flash('sucess', 'Atualizado com sucesso!.');
                 return view('site.filtro');
