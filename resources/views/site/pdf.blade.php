@@ -15,15 +15,17 @@
 
         <table id='tabela' class="table table-bordered">
             <tr>
-                <td>Nome:</td>
-                <td>Nº Processo</td>
-                <td>Data do Débito</td>
-                <td>Valor Originário</td>
-                <td>Anuidade Inicial</td>
-                <td>Anuidade Final</td>
-                <td>Total de Multas</td>
-                <td>Total de Juros</td>
-                <td>Valor Atualizado</td>
+                <th width="40%">Nome:</th>
+                <th>Nº Processo</th>
+                <th>Data do Débito</th>
+                <th>Valor Originário</th>
+                @if($tipo != 'multa')
+                <th>Anuidade Inicial</th>
+                <th>Anuidade Final</th>
+                <th>Total de Multas</th>
+                <th>Total de Juros</th>
+                @endif
+                <th>Valor Atualizado</th>
             </tr>
             
             <!--<div class="alert alert-danger" role="alert">Teste</div>-->
@@ -35,10 +37,12 @@
                     <td>{{$user["ef"]}}</td>
                     <td>{{date('d/m/Y',strtotime($user["dataDebito"]))}}</td>
                     <td>R$: {{ number_format($user["valorOriginal"], 2, ',','.')}}</td>
+                    @if($tipo != 'multa')
                     <td>{{$user["anuidadeInicial"]}}</td>
                     <td>{{$user["anuidadeFinal"]}}</td>
                     <td>R$: {{$user["totalMultas"]}}</td>
                     <td>R$: {{$user["totalJuros"]}}</td>
+                    @endif
                     <td>R$: {{$user["valorAtualizado"]}}</td>
                 </tr>
                 @endforeach
