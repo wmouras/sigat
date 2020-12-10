@@ -44,11 +44,18 @@
       <td>Valor Atualizado</td>
       <td>Situação</td>
       <td>Ação</td>
-  
+
   </tr>
-    
+
     @if(isset($resultado))
     @foreach($resultado as $user)
+
+    @if($user->getTable() == 'multa')
+        $opcao = 'multa'
+    @else
+        $opcao = 'anuidade'
+    @endif
+
         <tr>
             <td style="display:none">{{$user->id}}</td>
             <td>{{$user->nome}}</td>
@@ -62,11 +69,11 @@
             @else
             <td class="table-warning">Extinto</td>
             @endif
-            <td>            
-                <a href="{{route('editRegistro',['user'=>$user->id, 'opcao' => 'anuidade', 'id'=>$user->id])}}" class="btn btn-primary" >Editar</a>            
+            <td>
+                <a href="{{route('editRegistro',['user'=>$user->id, 'opcao' => $opcao, 'id'=>$user->id])}}" class="btn btn-primary" >Editar</a>
             </td>
             <td>
-                <a href="{{route('excluirRegistro',['user'=>$user->id, 'opcao' => 'anuidade', 'id'=>$user->id])}}" class="btn btn-danger" >Excluir</a>
+                <a href="{{route('excluirRegistro',['user'=>$user->id, 'opcao' => $opcao, 'id'=>$user->id])}}" class="btn btn-danger" >Excluir</a>
             </td>
         </tr>
     @endforeach

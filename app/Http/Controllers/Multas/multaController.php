@@ -64,7 +64,6 @@ class multaController extends Controller
             $indAt = $indAtual[0];
         }catch(Exception $e){
             session()->flash('msg', 'INPC do mês não cadastrado. favor contatar a ATI.');
-            return redirect()->back();
         }
 
         $indiceAtual = $indAt->numero_indice;
@@ -78,8 +77,7 @@ class multaController extends Controller
         $m1 = ($mesAtual - $mesAnterior) * -1;
         $mesesAtraso = ($m1 + $a1);
 
-        $valorOriginario = str_replace('.', '', $request->valorOriginario);
-        $request->valorOriginario = str_replace(',', '.', $valorOriginario);
+        $request->valorOriginario = alteraValorBd($request->valorOriginario);
 
         $total = total($indiceAtual, $indiceAnterior, $request->valorOriginario, $mesesAtraso);
         $jurosMulta = juros($indiceAtual, $indiceAnterior, $request->valorOriginario, $mesesAtraso);
