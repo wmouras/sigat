@@ -318,7 +318,8 @@ class dividaController extends Controller
                     'lista' =>$arrayResult,
                     'mensagem' =>'$mensagem',
                     'situacao' =>$situacao,
-                    'total' =>$total
+                    'total' =>$total,
+                    'tipo' => 'anuidade',
                 ]);
 
         }elseif($request->tipo == 'multa'){
@@ -486,7 +487,8 @@ class dividaController extends Controller
                     'lista' =>$result,
                     'mensagem' =>'$mensagem',
                     'situacao' =>$situacao,
-                    'total' =>$total
+                    'total' =>$total,
+                    'tipo' => 'anuidade',
                 ]);
         }elseif($request->tipo == 'multa'){
                 $situacao = $request->situacao;
