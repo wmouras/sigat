@@ -43,7 +43,7 @@
                     <td>R$: {{$user["totalMultas"]}}</td>
                     <td>R$: {{$user["totalJuros"]}}</td>
                     @endif
-                    <td>R$: {{$user["valorAtualizado"]}}</td>
+                    <td>R$: {{ number_format($user["valorAtualizado"], 2, ',', '.')}}</td>
                 </tr>
                 @endforeach
 
