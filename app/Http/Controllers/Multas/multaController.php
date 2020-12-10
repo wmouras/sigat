@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Multa;
 use Illuminate\Http\Request;
 use App\Http\Requests\MultaRequest;
+use Exception;
 
 class multaController extends Controller
 {
@@ -16,7 +17,7 @@ class multaController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -58,9 +59,14 @@ class multaController extends Controller
             $anoAtual -= 1;
         }
 
-        $indAtual = \DB::connection('mysql3')->table('inpc')->select('numero_indice')->where('mes',$mesAtual)->where('ano', $anoAtual)->get();
-        
-        $indAt = $indAtual[0];
+        try{
+            $indAtual = \DB::connection('mysql3')->table('inpc')->select('numero_indice')->where('mes', $mesAtual)->where('ano', $anoAtual)->get();
+            $indAt = $indAtual[0];
+        }catch(Exception $e){
+            session()->flash('msg', 'INPC do mês não cadastrado. favor contatar a ATI.');
+            return redirect()->back();
+        }
+
         $indiceAtual = $indAt->numero_indice;
 
         $indAnt = \DB::connection('mysql3')->table('inpc')->select('numero_indice')->where('mes',$mesAnterior)->where('ano', $anoAnterior)->get();
@@ -87,34 +93,34 @@ class multaController extends Controller
         $user->numero = $request->processo;
         $user->ef= ltrim( $request->ef, '0');
         $user->cpf_cnpj = preg_replace('/[^0-9]/', '', $request->cpf_cnpj);
-        $user->data_debito = $data;        
+        $user->data_debito = $data;
         $user->valor_originario = $request->valorOriginario;
         $user->juros = $jurosMulta;
         $user->correcaoMonetaria = $correcaoMonetaria;
         $user->valor_atualizado = $total;
- 
+
 
         if($request->situacao == 1){
             $user->ativo = 1;
             $user->extinto = 0;
-          
+
         }elseif($request->situacao == 0){
             $user->ativo = 0;
             $user->extinto = 1;
-           
+
         }
-        
+
         try{
             $user->save();
             return redirect('home');
         }catch(Excepion $e){
             echo 'Exceção: ',  $e->getMessage(), "\n";
         }
-        
+
 
     }
 
-  
+
     public function show(Multa $multa)
     {
         //
@@ -125,13 +131,13 @@ class multaController extends Controller
         //
     }
 
-    
+
     public function update(Request $request, Multa $multa)
     {
         //
     }
 
-   
+
     public function destroy(Multa $multa)
     {
         //
